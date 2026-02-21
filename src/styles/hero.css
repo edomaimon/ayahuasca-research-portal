@@ -1,0 +1,125 @@
+/* ============================================================
+   Hero Section Styles
+   ============================================================ */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero__video-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #0a1f0e;
+}
+
+.hero__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 32, 16, 0.50) 0%,
+    rgba(12, 36, 18, 0.40) 30%,
+    rgba(14, 30, 16, 0.58) 60%,
+    rgba(16, 28, 16, 0.85) 85%,
+    #f7f5f0 100%
+  );
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 5rem 1.5rem 3rem;
+  text-align: center;
+  animation: fadeUp 1s ease-out;
+}
+
+.hero__subtitle {
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 2rem;
+  font-family: var(--font-hero);
+  font-weight: 400;
+}
+
+.hero__title {
+  font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.05;
+  margin-bottom: 1.25rem;
+  font-family: var(--font-hero);
+  letter-spacing: -0.01em;
+}
+
+.hero__description {
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  color: rgba(255, 255, 255, 0.65);
+  max-width: 560px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.7;
+  font-family: var(--font-hero);
+}
+
+.hero__stats {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  animation: fadeUp 1s ease-out 0.3s both;
+}
+
+.hero__scroll-hint {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  animation: scrollHint 2.5s ease-in-out infinite;
+}
+
+/* --- Stat Card --- */
+.stat-card {
+  text-align: center;
+  padding: 1.1rem 1.2rem;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  min-width: 120px;
+}
+
+.stat-card__value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  font-family: var(--font-hero);
+  line-height: 1.1;
+}
+
+.stat-card__label {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 4px;
+  font-family: var(--font-body);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
