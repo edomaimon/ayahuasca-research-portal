@@ -186,6 +186,109 @@
   padding: 0 1.5rem 4rem;
 }
 
+/* --- About Section --- */
+.about-section {
+  background: linear-gradient(180deg, var(--color-bg) 0%, #f5f0eb 100%);
+  border-top: 1px solid var(--color-border-light);
+  padding: 3.5rem 1.5rem;
+  text-align: center;
+}
+
+.about-section__inner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.about-section__label {
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-text-lighter);
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+}
+
+.about-section__content {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.about-section__bio {
+  text-align: center;
+}
+
+.about-section__name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0 0 0.35rem;
+  letter-spacing: 0.01em;
+}
+
+.about-section__role {
+  font-size: 0.78rem;
+  color: var(--color-accent);
+  font-family: var(--font-body);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  margin-bottom: 1rem;
+}
+
+.about-section__text {
+  font-size: 0.84rem;
+  line-height: 1.8;
+  color: var(--color-text-light);
+  margin: 0 0 0.75rem;
+  font-family: var(--font-body);
+  text-align: left;
+}
+
+.about-section__links {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.about-section__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-family: var(--font-body);
+  color: var(--color-accent);
+  text-decoration: none;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.about-section__link:hover {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+}
+
+.about-section__mission {
+  font-size: 0.8rem;
+  line-height: 1.75;
+  color: var(--color-text-lighter);
+  font-family: var(--font-body);
+  font-style: italic;
+  margin: 1.5rem 0 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border-light);
+}
+
 /* ============================================================
    Media Queries
    ============================================================ */

@@ -6,6 +6,7 @@ import SearchFilters from './components/SearchFilters';
 import ArticleCard from './components/ArticleCard';
 import ArticleDetail from './components/ArticleDetail';
 import Footer from './components/Footer';
+import AboutSection from './components/AboutSection';
 import { LeafDivider, leafPatternUrl } from './components/BotanicalElements';
 
 // Import styles
@@ -159,6 +160,9 @@ export default function App() {
           )}
         </div>
       </main>
+
+      {/* About Section */}
+      <AboutSection />
 
       {/* Footer */}
       <Footer pubmedVerified={stats.pubmedVerified} />
