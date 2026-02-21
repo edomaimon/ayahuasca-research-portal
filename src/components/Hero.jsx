@@ -29,11 +29,11 @@ export default function Hero({ stats }) {
           playsInline
           webkit-playsinline="true"
           preload="auto"
-          poster="https://images.unsplash.com/photo-1516205651411-aef33a44f7c2?w=1920&q=80"
+          poster="https://images.unsplash.com/photo-1440581572325-0bea30075d9d?w=1920&q=80"
           className="hero__video"
         >
           <source
-            src="https://cdn.coverr.co/videos/coverr-a-forest-after-the-rain-3007/1080p.mp4"
+            src="https://cdn.coverr.co/videos/coverr-jungle-plants-3922/1080p.mp4"
             type="video/mp4"
           />
         </video>

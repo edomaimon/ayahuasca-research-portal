@@ -15,7 +15,7 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: #1a2a1c;
+  background: #0a1f0e;
 }
 
 .hero__video {
@@ -30,10 +30,10 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(18, 28, 18, 0.55) 0%,
-    rgba(18, 28, 18, 0.45) 30%,
-    rgba(18, 28, 18, 0.65) 60%,
-    rgba(18, 28, 18, 0.88) 85%,
+    rgba(10, 32, 16, 0.50) 0%,
+    rgba(12, 36, 18, 0.40) 30%,
+    rgba(14, 30, 16, 0.58) 60%,
+    rgba(16, 28, 16, 0.85) 85%,
     #f7f5f0 100%
   );
 }
