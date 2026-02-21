@@ -1,0 +1,190 @@
+/* ============================================================
+   Article Card & Grid Styles
+   ============================================================ */
+
+.article-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1rem;
+}
+
+.article-card {
+  background: #fff;
+  border-radius: 6px;
+  padding: 1.4rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid var(--color-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.article-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(46, 90, 52, 0.08);
+  border-color: var(--color-primary-light);
+}
+
+.article-card__accent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+}
+
+.article-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.article-card__category {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: var(--font-body);
+}
+
+.article-card__title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--color-text);
+  font-family: var(--font-display);
+  margin: 0;
+  flex: 1;
+}
+
+.article-card__authors {
+  font-size: 0.76rem;
+  color: var(--color-text-light);
+  font-family: var(--font-body);
+  font-style: italic;
+}
+
+.article-card__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  border-top: 1px solid var(--color-border-light);
+  padding-top: 10px;
+}
+
+.article-card__journal {
+  font-size: 0.73rem;
+  font-weight: 500;
+  color: var(--color-text-light);
+  font-family: var(--font-body);
+}
+
+.article-card__stats {
+  display: flex;
+  gap: 12px;
+  font-size: 0.68rem;
+  color: var(--color-text-lighter);
+}
+
+.article-card__open-access {
+  color: #2e7d52;
+  font-weight: 600;
+}
+
+.article-card__study-type {
+  font-size: 0.66rem;
+  background: var(--color-bg-subtle);
+  padding: 4px 10px;
+  border-radius: 3px;
+  align-self: flex-start;
+  color: var(--color-text-light);
+  font-family: var(--font-body);
+  border: 1px solid var(--color-border-light);
+}
+
+/* --- Category Pill --- */
+.category-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 500;
+  font-family: var(--font-body);
+  transition: all 0.2s ease;
+  letter-spacing: 0.01em;
+}
+
+.category-pill--active {
+  color: #fff;
+}
+
+.category-pill--inactive {
+  background: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.category-pill__count {
+  font-size: 0.68rem;
+  opacity: 0.65;
+  font-weight: 400;
+}
+
+/* --- Verification Badge --- */
+.verification-badge {
+  font-size: 0.62rem;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  font-family: var(--font-body);
+  text-transform: uppercase;
+}
+
+.verification-badge--pubmed {
+  background: #e8f5e9;
+  color: #2e5a34;
+  border: 1px solid #c8e6c9;
+}
+
+.verification-badge--doi {
+  background: #e8edf5;
+  color: #2a4075;
+  border: 1px solid #c8d5e8;
+}
+
+.verification-badge--publisher {
+  background: #fdf5e6;
+  color: #7a5a1a;
+  border: 1px solid #f0e4c8;
+}
+
+/* --- No Results --- */
+.no-results {
+  text-align: center;
+  padding: 5rem 1rem;
+  color: var(--color-text-light);
+}
+
+.no-results__title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 8px;
+  font-family: var(--font-display);
+}
+
+.no-results__text {
+  font-size: 0.88rem;
+  font-family: var(--font-body);
+}
