@@ -1,0 +1,119 @@
+# =============================================================
+# Ayahuasca Research Portal — Auto-Ingestion Workflow
+# =============================================================
+# Runs every 2 weeks (1st and 15th of each month at 06:00 UTC)
+# Searches PubMed for new ayahuasca research papers, validates
+# them, adds to articles.js, sends newsletter, and deploys.
+#
+# Required GitHub Secrets:
+#   PUBMED_API_KEY     — Free from https://www.ncbi.nlm.nih.gov/account/
+#   BUTTONDOWN_API_KEY — From https://buttondown.com/settings/api
+# =============================================================
+
+name: Auto-Ingest New Articles
+
+on:
+  schedule:
+    # Runs at 06:00 UTC on the 1st and 15th of every month
+    - cron: '0 6 1,15 * *'
+  
+  # Allow manual trigger from GitHub Actions tab
+  workflow_dispatch:
+    inputs:
+      days_back:
+        description: 'Days to look back for new articles'
+        required: false
+        default: '15'
+      dry_run:
+        description: 'Dry run (preview only, no changes)'
+        required: false
+        default: 'false'
+        type: boolean
+      send_digest:
+        description: 'Send newsletter digest'
+        required: false
+        default: 'true'
+        type: boolean
+
+permissions:
+  contents: write  # Needed to push changes to articles.js
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Run ingestion script
+        env:
+          PUBMED_API_KEY: ${{ secrets.PUBMED_API_KEY }}
+          BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
+        run: |
+          DAYS="${{ github.event.inputs.days_back || '15' }}"
+          DRY_RUN="${{ github.event.inputs.dry_run || 'false' }}"
+          SEND_DIGEST="${{ github.event.inputs.send_digest || 'true' }}"
+          
+          CMD="python scripts/ingest.py --days $DAYS"
+          
+          if [ "$DRY_RUN" = "true" ]; then
+            CMD="$CMD --dry-run"
+          fi
+          
+          if [ "$SEND_DIGEST" = "true" ] && [ "$DRY_RUN" != "true" ]; then
+            CMD="$CMD --send-digest"
+          fi
+          
+          echo "Running: $CMD"
+          $CMD
+      
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if git diff --quiet; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "No changes to commit"
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "Changes detected in articles.js"
+          fi
+      
+      - name: Commit and push changes
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          git config user.name "Ayahuasca Portal Bot"
+          git config user.email "bot@ayahuasca-research.org"
+          
+          # Count new articles from the diff
+          NEW_COUNT=$(git diff --unified=0 src/data/articles.js | grep "^+" | grep "id:" | wc -l)
+          DATE=$(date +"%Y-%m-%d")
+          
+          git add src/data/articles.js
+          git add scripts/latest-digest.md || true  # May not exist
+          
+          git commit -m "🌿 Auto-ingest: ${NEW_COUNT} new article(s) — ${DATE}" \
+                     -m "Automated PubMed ingestion via GitHub Actions." \
+                     -m "Each article validated: PMID verified, DOI checked, relevance confirmed."
+          
+          git push
+          echo "✅ Changes pushed. Vercel will auto-deploy."
+      
+      - name: Summary
+        if: always()
+        run: |
+          echo "## 🌿 Ingestion Run Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.check_changes.outputs.has_changes }}" = "true" ]; then
+            echo "✅ New articles added and pushed." >> $GITHUB_STEP_SUMMARY
+            echo "Vercel will auto-deploy the updated site." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "No new articles found this cycle." >> $GITHUB_STEP_SUMMARY
+          fi
