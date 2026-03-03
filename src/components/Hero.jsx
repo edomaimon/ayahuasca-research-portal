@@ -66,8 +66,8 @@ export default function Hero({ stats }) {
 
         <p className="hero__description">
           A curated collection of {stats.total} verified peer-reviewed articles
-          spanning {stats.yearRange}. Every article authenticated via PubMed,
-          DOI resolution, or publisher records.
+          spanning {stats.yearRange}, updated with new research every two weeks.
+          Each entry verified via PubMed, DOI, or publisher records.
         </p>
 
         <div className="hero__stats">
