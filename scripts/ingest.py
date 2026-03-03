@@ -883,7 +883,7 @@ def run_ingestion(articles_path, days_back=15, dry_run=False, send_digest=False)
     # Step 8: Generate digest
     digest_md, digest_html = generate_digest(validated, existing["count"])
     
-    digest_path = os.path.join(os.path.dirname(articles_path), "..", "scripts", "latest-digest.md")
+    digest_path = os.path.join("scripts", "latest-digest.md")
     os.makedirs(os.path.dirname(digest_path), exist_ok=True)
     with open(digest_path, "w", encoding="utf-8") as f:
         f.write(digest_md)
@@ -928,6 +928,7 @@ if __name__ == "__main__":
     else:
         # Try common locations
         candidates = [
+            "src/components/articles.js",
             "src/data/articles.js",
             "data/articles.js",
             "articles.js",

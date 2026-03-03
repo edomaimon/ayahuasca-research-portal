@@ -10,7 +10,7 @@
 
 import { useState } from 'react';
 
-const BUTTONDOWN_USERNAME = 'ayahuasca-research'; // ← Replace this
+const BUTTONDOWN_USERNAME = 'ayahuasca-research'; // Your Buttondown username
 
 export default function Subscribe() {
   const [email, setEmail] = useState('');
@@ -26,7 +26,7 @@ export default function Subscribe() {
       // Buttondown's built-in form endpoint (no API key needed client-side)
       const form = document.createElement('form');
       form.method = 'POST';
-      form.action = `https://buttondown.com/api/emails/embed-subscribe/${ayahuasca-research}`;
+      form.action = `https://buttondown.com/api/emails/embed-subscribe/${BUTTONDOWN_USERNAME}`;
       form.target = '_blank';
 
       const input = document.createElement('input');
