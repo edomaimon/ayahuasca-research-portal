@@ -27,7 +27,7 @@ function getStats() {
     totalCitations: articles.reduce((sum, a) => sum + (a.citations || 0), 0),
     journals: new Set(articles.map((a) => a.journal)).size,
     yearRange: `${Math.min(...articles.map((a) => a.year))}-${Math.max(...articles.map((a) => a.year))}`,
-    pubmedVerified: articles.filter((a) => a.verification === 'PubMed').length,
+    pubmedVerified: articles.filter((a) => a.verification?.startsWith('PubMed')).length,
     categories: Object.keys(CATEGORIES).map((cat) => ({
       name: cat,
       count: articles.filter((a) => a.category === cat).length,
