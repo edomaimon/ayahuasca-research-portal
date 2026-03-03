@@ -1,8 +1,0 @@
-{
-  "framework": "vite",
-  "functions": {
-    "api/og.jsx": {
-      "runtime": "edge"
-    }
-  }
-}
