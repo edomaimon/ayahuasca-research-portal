@@ -765,7 +765,7 @@ def send_buttondown_newsletter(subject, html_body, api_key):
     payload = json.dumps({
         "subject": subject,
         "body": html_body,
-        "status": "draft",  # Change to "about_to_send" for auto-publish
+        "status": "about_to_send",  # Automatically sends to all subscribers
     }).encode("utf-8")
     
     req = Request(
