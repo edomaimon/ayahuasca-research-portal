@@ -97,6 +97,7 @@ jobs:
           DATE=$(date +"%Y-%m-%d")
           
           git add src/data/articles.js
+          git add public/stats.json || true
           git add scripts/latest-digest.md || true  # May not exist
           
           git commit -m "🌿 Auto-ingest: ${NEW_COUNT} new article(s) — ${DATE}" \

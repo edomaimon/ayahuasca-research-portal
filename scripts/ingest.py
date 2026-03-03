@@ -710,6 +710,23 @@ def append_to_articles_js(filepath, new_entries, existing_data):
     with open(filepath, "w", encoding="utf-8") as f:
         f.write(new_content)
     
+    # Update public/stats.json for dynamic OG image
+    stats_path = os.path.join(os.path.dirname(filepath), "..", "public", "stats.json")
+    stats_path = os.path.normpath(stats_path)
+    if os.path.exists(os.path.dirname(stats_path)):
+        import json as json_mod
+        min_year = 1972
+        max_year = datetime.now().year
+        stats_data = {
+            "total": new_count,
+            "yearRange": f"{min_year}-{max_year}",
+            "lastUpdated": today
+        }
+        with open(stats_path, "w", encoding="utf-8") as sf:
+            json_mod.dump(stats_data, sf, indent=2)
+            sf.write("\n")
+        log.info(f"Updated stats.json: {new_count} articles")
+    
     return True
 
 
