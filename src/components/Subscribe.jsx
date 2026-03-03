@@ -1,16 +1,10 @@
 // =============================================================
-// Newsletter Subscribe Component
-// =============================================================
-// Add this to your site (e.g., footer, About page, or homepage)
-// Replace YOUR_BUTTONDOWN_USERNAME with your Buttondown username
-//
-// Usage: import Subscribe from './Subscribe';
-//        <Subscribe />
+// Ayahuasca Research Digest — Subscribe Component
 // =============================================================
 
 import { useState } from 'react';
 
-const BUTTONDOWN_USERNAME = 'ayahuasca-research'; // Your Buttondown username
+const BUTTONDOWN_USERNAME = 'ayahuasca-research';
 
 export default function Subscribe() {
   const [email, setEmail] = useState('');
@@ -23,7 +17,6 @@ export default function Subscribe() {
     setStatus('loading');
 
     try {
-      // Buttondown's built-in form endpoint (no API key needed client-side)
       const form = document.createElement('form');
       form.method = 'POST';
       form.action = `https://buttondown.com/api/emails/embed-subscribe/${BUTTONDOWN_USERNAME}`;
@@ -47,88 +40,152 @@ export default function Subscribe() {
   };
 
   return (
-    <div style={{
-      background: 'linear-gradient(135deg, #0d1f15 0%, #091a10 100%)',
-      border: '1px solid rgba(74, 222, 128, 0.15)',
-      borderRadius: '12px',
-      padding: '32px',
-      maxWidth: '480px',
-      margin: '0 auto',
+    <section style={{
+      background: '#fff',
+      borderTop: '1px solid #d5d0c6',
+      borderBottom: '1px solid #d5d0c6',
+      padding: '3.5rem 1.5rem',
     }}>
-      <h3 style={{
-        color: '#e8c872',
-        fontSize: '1.25rem',
-        fontFamily: 'Vollkorn, serif',
-        margin: '0 0 8px 0',
+      <div style={{
+        maxWidth: '520px',
+        margin: '0 auto',
+        textAlign: 'center',
       }}>
-        Stay Updated
-      </h3>
-      <p style={{
-        color: '#a7f3d0',
-        fontSize: '0.9rem',
-        margin: '0 0 20px 0',
-        lineHeight: 1.5,
-        opacity: 0.8,
-      }}>
-        Get notified when new ayahuasca research papers are added to the portal.
-        Delivered every two weeks.
-      </p>
-
-      {status === 'success' ? (
-        <p style={{
-          color: '#4ade80',
-          fontSize: '0.95rem',
-          padding: '12px 16px',
-          background: 'rgba(74, 222, 128, 0.1)',
-          borderRadius: '8px',
-          margin: 0,
+        {/* Label */}
+        <div style={{
+          fontSize: '0.68rem',
+          letterSpacing: '0.15em',
+          textTransform: 'uppercase',
+          color: '#8a9688',
+          fontFamily: "'Figtree', system-ui, sans-serif",
+          fontWeight: 600,
+          marginBottom: '0.75rem',
         }}>
-          Check your email to confirm your subscription.
-        </p>
-      ) : (
-        <form onSubmit={handleSubmit} style={{ display: 'flex', gap: '8px' }}>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="your@email.com"
-            required
-            style={{
-              flex: 1,
-              padding: '10px 14px',
-              borderRadius: '8px',
-              border: '1px solid rgba(74, 222, 128, 0.2)',
-              background: 'rgba(0, 0, 0, 0.3)',
-              color: '#e2e8f0',
-              fontSize: '0.9rem',
-              outline: 'none',
-            }}
-          />
-          <button
-            type="submit"
-            disabled={status === 'loading'}
-            style={{
-              padding: '10px 20px',
-              borderRadius: '8px',
-              border: 'none',
-              background: status === 'loading' ? '#2d6a4f' : '#4ade80',
-              color: '#020604',
-              fontSize: '0.9rem',
-              fontWeight: 600,
-              cursor: status === 'loading' ? 'wait' : 'pointer',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            {status === 'loading' ? '...' : 'Subscribe'}
-          </button>
-        </form>
-      )}
+          Bi-Weekly Research Digest
+        </div>
 
-      {status === 'error' && (
-        <p style={{ color: '#f87171', fontSize: '0.85rem', marginTop: '8px' }}>
-          Something went wrong. Please try again.
+        {/* Title */}
+        <h2 style={{
+          fontFamily: "'Vollkorn', Georgia, serif",
+          fontSize: '1.4rem',
+          fontWeight: 600,
+          color: '#2a3028',
+          margin: '0 0 0.75rem 0',
+          lineHeight: 1.3,
+        }}>
+          Ayahuasca Research Digest
+        </h2>
+
+        {/* Description */}
+        <p style={{
+          fontFamily: "'Figtree', system-ui, sans-serif",
+          fontSize: '0.88rem',
+          lineHeight: 1.7,
+          color: '#556355',
+          margin: '0 0 1.5rem 0',
+          maxWidth: '440px',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+        }}>
+          A curated summary of new peer-reviewed ayahuasca research articles 
+          published in the past two weeks, delivered straight to your inbox 
+          on the 1st and 15th of every month.
         </p>
-      )}
-    </div>
+
+        {/* Form or Success */}
+        {status === 'success' ? (
+          <div style={{
+            padding: '14px 20px',
+            background: '#e8f5e9',
+            border: '1px solid #c8e6c9',
+            borderRadius: '6px',
+            color: '#2e5a34',
+            fontSize: '0.88rem',
+            fontFamily: "'Figtree', system-ui, sans-serif",
+            fontWeight: 500,
+          }}>
+            Check your email to confirm your subscription.
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} style={{
+            display: 'flex',
+            gap: '8px',
+            maxWidth: '420px',
+            margin: '0 auto',
+          }}>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="your@email.com"
+              required
+              style={{
+                flex: 1,
+                padding: '12px 16px',
+                borderRadius: '6px',
+                border: '1px solid #d5d0c6',
+                background: '#faf8f4',
+                color: '#2a3028',
+                fontSize: '0.88rem',
+                fontFamily: "'Figtree', system-ui, sans-serif",
+                outline: 'none',
+                boxSizing: 'border-box',
+              }}
+              onFocus={(e) => {
+                e.target.style.borderColor = '#2e5a34';
+                e.target.style.boxShadow = '0 0 0 3px rgba(46, 90, 52, 0.08)';
+              }}
+              onBlur={(e) => {
+                e.target.style.borderColor = '#d5d0c6';
+                e.target.style.boxShadow = 'none';
+              }}
+            />
+            <button
+              type="submit"
+              disabled={status === 'loading'}
+              style={{
+                padding: '12px 24px',
+                borderRadius: '6px',
+                border: 'none',
+                background: status === 'loading' ? '#4a7a50' : '#2e5a34',
+                color: '#fff',
+                fontSize: '0.85rem',
+                fontWeight: 600,
+                fontFamily: "'Figtree', system-ui, sans-serif",
+                cursor: status === 'loading' ? 'wait' : 'pointer',
+                whiteSpace: 'nowrap',
+                letterSpacing: '0.02em',
+                transition: 'background 0.2s',
+              }}
+              onMouseEnter={(e) => { if (status !== 'loading') e.target.style.background = '#4a7a50'; }}
+              onMouseLeave={(e) => { if (status !== 'loading') e.target.style.background = '#2e5a34'; }}
+            >
+              {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
+            </button>
+          </form>
+        )}
+
+        {status === 'error' && (
+          <p style={{
+            color: '#c25a6a',
+            fontSize: '0.82rem',
+            marginTop: '10px',
+            fontFamily: "'Figtree', system-ui, sans-serif",
+          }}>
+            Something went wrong. Please try again.
+          </p>
+        )}
+
+        {/* Privacy note */}
+        <p style={{
+          fontSize: '0.72rem',
+          color: '#8a9688',
+          marginTop: '1rem',
+          fontFamily: "'Figtree', system-ui, sans-serif",
+        }}>
+          No spam. Unsubscribe anytime. Powered by Buttondown.
+        </p>
+      </div>
+    </section>
   );
 }
