@@ -382,9 +382,38 @@ def parse_single_article(elem):
 # ============================================================
 
 def check_relevance(article):
-    """Check if article is actually about ayahuasca research."""
-    text = (article.get("title", "") + " " + article.get("abstract", "")).lower()
+    """Check if article is actually about ayahuasca research.
     
+    STRICT: At least one core term must appear in the TITLE.
+    Abstract-only mentions are not enough — this filters out papers
+    that only reference ayahuasca in passing.
+    """
+    title = article.get("title", "").lower()
+    
+    # Core terms that must appear in the title
+    TITLE_REQUIRED_TERMS = [
+        r"ayahuasca",
+        r"banisteriopsis\s*caapi",
+        r"\bdmt\b.*\bharmine\b|\bharmine\b.*\bdmt\b",
+        r"\bhoasca\b",
+        r"santo\s*daime",
+        r"uni[aã]o\s*do\s*vegetal",
+        r"\budv\b",
+        r"chacruna",
+        r"psychotria\s*viridis",
+    ]
+    
+    title_match = False
+    for term in TITLE_REQUIRED_TERMS:
+        if re.search(term, title, re.IGNORECASE):
+            title_match = True
+            break
+    
+    if not title_match:
+        return False
+    
+    # If title matches, also verify broader relevance in title + abstract
+    text = (title + " " + article.get("abstract", "")).lower()
     for term in RELEVANCE_TERMS:
         if re.search(term, text, re.IGNORECASE):
             return True
