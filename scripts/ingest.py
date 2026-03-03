@@ -394,7 +394,9 @@ def check_relevance(article):
     TITLE_REQUIRED_TERMS = [
         r"ayahuasca",
         r"banisteriopsis\s*caapi",
-        r"\bdmt\b.*\bharmine\b|\bharmine\b.*\bdmt\b",
+        r"\bdmt\b",
+        r"\bharmine\b",
+        r"\bharmaline\b",
         r"\bhoasca\b",
         r"santo\s*daime",
         r"uni[aã]o\s*do\s*vegetal",
