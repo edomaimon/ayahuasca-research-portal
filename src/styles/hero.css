@@ -18,11 +18,16 @@
   background: #0a1f0e;
 }
 
-.hero__about-link {
+.hero__nav-links {
   position: absolute;
   top: 1.1rem;
   left: 1.1rem;
   z-index: 10;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.hero__about-link {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
@@ -81,7 +86,7 @@
   font-size: 0.72rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.75);
   margin-bottom: 2rem;
   font-family: var(--font-hero);
   font-weight: 400;
