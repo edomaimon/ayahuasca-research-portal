@@ -40,7 +40,7 @@ export default function Subscribe() {
   };
 
   return (
-    <section style={{
+    <section id="subscribe" style={{
       background: '#fff',
       borderTop: '1px solid #d5d0c6',
       borderBottom: '1px solid #d5d0c6',
