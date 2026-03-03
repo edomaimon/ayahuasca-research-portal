@@ -17,7 +17,8 @@ export default function Footer({ pubmedVerified }) {
           Every article in this database has been individually verified through
           PubMed PMID confirmation ({pubmedVerified} articles), DOI resolution,
           or direct publisher record confirmation. Articles with unverifiable
-          references have been removed. Last audit: February 21, 2026.
+          references have been removed. New articles are verified automatically
+          as they are added.
         </p>
 
         <div className="footer__badges">
