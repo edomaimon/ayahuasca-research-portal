@@ -727,6 +727,17 @@ def append_to_articles_js(filepath, new_entries, existing_data):
             sf.write("\n")
         log.info(f"Updated stats.json: {new_count} articles")
     
+    # Regenerate OG image with updated count
+    try:
+        og_script = os.path.join(os.path.dirname(filepath), "..", "scripts", "generate-og.py")
+        og_script = os.path.normpath(og_script)
+        if os.path.exists(og_script):
+            import subprocess
+            subprocess.run(["python3", og_script], check=True)
+            log.info("Regenerated OG image")
+    except Exception as e:
+        log.warning(f"Could not regenerate OG image: {e}")
+    
     return True
 
 

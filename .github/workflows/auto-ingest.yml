@@ -53,6 +53,9 @@ jobs:
         with:
           python-version: '3.11'
       
+      - name: Install dependencies
+        run: pip install Pillow
+
       - name: Run ingestion script
         env:
           PUBMED_API_KEY: ${{ secrets.PUBMED_API_KEY }}
@@ -98,6 +101,7 @@ jobs:
           
           git add src/data/articles.js
           git add public/stats.json || true
+          git add public/og-image.png || true
           git add scripts/latest-digest.md || true  # May not exist
           
           git commit -m "🌿 Auto-ingest: ${NEW_COUNT} new article(s) — ${DATE}" \
