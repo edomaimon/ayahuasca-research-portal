@@ -1,33 +1,31 @@
 import './globals.css';
 
+const SITE_URL = 'https://www.ayahuasca-research.com';
+
 export const metadata = {
-  title: 'Ayahuasca Research Portal',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: 'Ayahuasca Research Portal',
+    template: '%s | Ayahuasca Research Portal',
+  },
   description:
-    'Ayahuasca Research Portal - A curated database of verified peer-reviewed articles and academic books spanning 1972-2026, updated biweekly. Every article verified via PubMed, DOI, or publisher records.',
+    'A curated database of verified peer-reviewed articles and academic books on ayahuasca research, spanning 1972-2026. Updated biweekly. Every article verified via PubMed, DOI, or publisher records.',
   keywords:
     'ayahuasca, research, scientific literature, PubMed, clinical trials, psychedelic research, DMT, harmine',
   authors: [{ name: 'Ayahuasca Research Portal' }],
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     title: 'Ayahuasca Research Portal',
     description:
       'A curated database of verified peer-reviewed articles and academic books on ayahuasca research, spanning 1972-2026. Updated biweekly.',
     type: 'website',
-    url: 'https://www.ayahuasca-research.com/',
-    images: [
-      {
-        url: 'https://www.ayahuasca-research.com/og-image.jpg',
-        width: 1200,
-        height: 630,
-        type: 'image/jpeg',
-      },
-    ],
+    url: SITE_URL,
+    siteName: 'Ayahuasca Research Portal',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ayahuasca Research Portal',
-    description:
-      'A curated database of verified peer-reviewed articles and academic books on ayahuasca research, spanning 1972-2026. Updated biweekly.',
-    images: ['https://www.ayahuasca-research.com/og-image.jpg'],
   },
   icons: {
     icon: '/favicon.svg',

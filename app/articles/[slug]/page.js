@@ -27,18 +27,36 @@ export async function generateStaticParams() {
   }));
 }
 
+const SITE_URL = 'https://www.ayahuasca-research.com';
+
 export async function generateMetadata({ params }) {
   const { slug } = params;
   const article = VERIFIED_ARTICLES.find(a => a.slug === slug);
   if (!article) return { title: 'Article Not Found' };
 
+  const description = article.abstract
+    ? article.abstract.slice(0, 155).replace(/\s+\S*$/, '...')
+    : `${article.title} - ${article.journal} (${article.year})`;
+
   return {
-    title: `${article.title} | Ayahuasca Research Portal`,
-    description: article.abstract?.slice(0, 160) || `${article.title} - ${article.journal} (${article.year})`,
+    title: article.title,
+    description,
+    alternates: {
+      canonical: `/articles/${slug}`,
+    },
     openGraph: {
       title: article.title,
-      description: article.abstract?.slice(0, 160),
+      description,
       type: 'article',
+      url: `${SITE_URL}/articles/${slug}`,
+      publishedTime: `${article.year}-01-01T00:00:00Z`,
+      authors: article.authors,
+      tags: article.keywords,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.title,
+      description,
     },
   };
 }
@@ -54,8 +72,33 @@ export default function ArticlePage({ params }) {
     ? article.title.slice(0, 50) + '...'
     : article.title;
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ScholarlyArticle',
+    name: article.title,
+    headline: article.title,
+    abstract: article.abstract || '',
+    datePublished: `${article.year}-01-01`,
+    author: (article.authors || []).map(name => ({
+      '@type': 'Person',
+      name,
+    })),
+    publisher: {
+      '@type': 'Organization',
+      name: article.journal,
+    },
+    isAccessibleForFree: article.openAccess || false,
+    url: `${SITE_URL}/articles/${article.slug}`,
+    ...(article.doi && { identifier: { '@type': 'PropertyValue', propertyID: 'DOI', value: article.doi } }),
+    ...(article.keywords && { keywords: article.keywords.join(', ') }),
+  };
+
   return (
     <div className="article-page-wrapper">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <article className="article-page">
         {/* Breadcrumb */}
         <nav className="article-page__breadcrumb">
