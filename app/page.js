@@ -29,16 +29,19 @@ function getStudyTypes() {
     .map(([name, count]) => ({ name, count }));
 }
 
-export default function Page() {
+export default function Page({ searchParams }) {
   const stats = getStats();
   const studyTypes = getStudyTypes();
   const articles = VERIFIED_ARTICLES;
+  const initialSearch = searchParams?.search || '';
 
   return (
     <HomePage
+      key={initialSearch}
       articles={articles}
       stats={stats}
       studyTypes={studyTypes}
+      initialSearch={initialSearch}
     />
   );
 }

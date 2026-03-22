@@ -4,19 +4,23 @@ import { useState, useMemo } from 'react';
 import Hero from './Hero';
 import SearchFilters from './SearchFilters';
 import ArticleCard from './ArticleCard';
-import ArticleDetail from './ArticleDetail';
 import Footer from './Footer';
 import AboutSection from './AboutSection';
 import Subscribe from './Subscribe';
 import { LeafDivider, leafPatternUrl } from './BotanicalElements';
 
-export default function HomePage({ articles, stats, studyTypes }) {
-  const [search, setSearch] = useState('');
+// Modal kept for future quick-preview feature
+// import ArticleDetail from './ArticleDetail';
+
+export default function HomePage({ articles, stats, studyTypes, initialSearch }) {
+  const [search, setSearch] = useState(initialSearch || '');
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedStudyType, setSelectedStudyType] = useState(null);
-  const [selectedArticle, setSelectedArticle] = useState(null);
   const [sortBy, setSortBy] = useState('newest');
   const [openAccessOnly, setOpenAccessOnly] = useState(false);
+
+  // Modal state kept for future quick-preview feature
+  // const [selectedArticle, setSelectedArticle] = useState(null);
 
   const filteredArticles = useMemo(() => {
     let result = [...articles];
@@ -103,7 +107,6 @@ export default function HomePage({ articles, stats, studyTypes }) {
               <ArticleCard
                 key={article.id}
                 article={article}
-                onClick={setSelectedArticle}
               />
             ))}
           </div>
@@ -130,13 +133,13 @@ export default function HomePage({ articles, stats, studyTypes }) {
       {/* Footer */}
       <Footer pubmedVerified={stats.pubmedVerified} />
 
-      {/* Article Detail Modal */}
-      {selectedArticle && (
+      {/* Modal kept for future quick-preview feature */}
+      {/* {selectedArticle && (
         <ArticleDetail
           article={selectedArticle}
           onClose={() => setSelectedArticle(null)}
         />
-      )}
+      )} */}
     </>
   );
 }

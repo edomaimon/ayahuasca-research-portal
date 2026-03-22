@@ -192,4 +192,23 @@ export const VERIFIED_ARTICLES = [
   { id:168, title:"Predicting drug-drug interactions between ayahuasca alkaloids and SSRIs using physiologically based pharmacokinetic modeling", authors:["Ribeiro GSG","Paranhos BAPB","Dörr F","Yonamine M","Villanova B","Guerra LTL","Raminelli AO","Reis JAS","de Paula CC","Zacharias ABV","Cecílio Hallak JE","Dos Santos RG","Martins FS","Marcourakis T"], journal:"Frontiers in molecular biosciences", year:2026, doi:"10.3389/fmolb.2026.1768402", pmid:"41788629", category:"Depression & Mood", studyType:"Pharmacokinetic study", openAccess:true, citations:0, abstract:"INTRODUCTION: Ayahuasca is a psychedelic preparation containing N,N-dimethyltryptamine (DMT) and the β-carboline harmine (HRM), a reversible monoamine oxidase A inhibitor that enables DMT oral bioavailability. The increasing concomitant use of ayahuasca with selective serotonin reuptake inhibitors (SSRIs) has raised concerns about potential phar...", keywords:["ddi","n,n-dimethyltryptamine","pbpk modeling","ssri"], verification:"PubMed-Auto" }
 ];
 
+// Generate slugs for all articles at module load time
+function _generateSlug(title) {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
+    .slice(0, 80)
+    .replace(/-$/, '');
+}
+const _slugSet = new Set();
+VERIFIED_ARTICLES.forEach(a => {
+  let slug = _generateSlug(a.title);
+  if (_slugSet.has(slug)) slug = `${slug}-${a.id}`;
+  _slugSet.add(slug);
+  a.slug = slug;
+});
+
 export default VERIFIED_ARTICLES;

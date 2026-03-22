@@ -1,13 +1,14 @@
 'use client';
 
+import Link from 'next/link';
 import { CATEGORIES } from '@/data/categories';
 import VerificationBadge from './VerificationBadge';
 
-export default function ArticleCard({ article, onClick }) {
+export default function ArticleCard({ article }) {
   const cat = CATEGORIES[article.category] || {};
 
   return (
-    <div className="article-card" onClick={() => onClick(article)}>
+    <Link href={`/articles/${article.slug}`} className="article-card">
       {/* Left accent bar */}
       <div
         className="article-card__accent"
@@ -46,6 +47,6 @@ export default function ArticleCard({ article, onClick }) {
       {article.studyType && (
         <span className="article-card__study-type">{article.studyType}</span>
       )}
-    </div>
+    </Link>
   );
 }
