@@ -6,25 +6,28 @@ import { BotanicalCorner } from './BotanicalElements';
 import VerificationBadge from './VerificationBadge';
 
 export default function ArticleDetail({ article, onClose }) {
-  if (!article) return null;
-  const cat = CATEGORIES[article.category] || {};
+  const cat = CATEGORIES[article?.category] || {};
 
   // Prevent body scroll when modal is open
   useEffect(() => {
+    if (!article) return;
     document.body.style.overflow = 'hidden';
     return () => {
       document.body.style.overflow = '';
     };
-  }, []);
+  }, [article]);
 
   // Close on Escape key
   useEffect(() => {
+    if (!article) return;
     const handleKey = (e) => {
       if (e.key === 'Escape') onClose();
     };
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
-  }, [onClose]);
+  }, [article, onClose]);
+
+  if (!article) return null;
 
   return (
     <div className="modal-overlay" onClick={onClose}>

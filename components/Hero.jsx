@@ -44,7 +44,6 @@ export default function Hero({ stats }) {
           muted
           loop
           playsInline
-          webkit-playsinline="true"
           preload="auto"
           poster="https://images.unsplash.com/photo-1440581572325-0bea30075d9d?w=1920&q=80"
           className="hero__video"
