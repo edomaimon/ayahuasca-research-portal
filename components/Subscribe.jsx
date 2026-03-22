@@ -1,6 +1,4 @@
-// =============================================================
-// Ayahuasca Research Digest — Subscribe Component
-// =============================================================
+'use client';
 
 import { useState } from 'react';
 
@@ -87,8 +85,8 @@ export default function Subscribe() {
           marginLeft: 'auto',
           marginRight: 'auto',
         }}>
-          A curated summary of new peer-reviewed ayahuasca research articles 
-          published in the past two weeks, delivered straight to your inbox 
+          A curated summary of new peer-reviewed ayahuasca research articles
+          published in the past two weeks, delivered straight to your inbox
           on the 1st and 15th of every month.
         </p>
 

@@ -96,10 +96,10 @@ jobs:
           git config user.email "bot@ayahuasca-research.org"
           
           # Count new articles from the diff
-          NEW_COUNT=$(git diff --unified=0 src/data/articles.js | grep "^+" | grep "id:" | wc -l)
+          NEW_COUNT=$(git diff --unified=0 data/articles.js | grep "^+" | grep "id:" | wc -l)
           DATE=$(date +"%Y-%m-%d")
-          
-          git add src/data/articles.js
+
+          git add data/articles.js
           git add public/stats.json || true
           git add public/og-image.png || true
           git add scripts/latest-digest.md || true  # May not exist

@@ -1,11 +1,9 @@
+'use client';
+
 import { useEffect } from 'react';
-import { CATEGORIES } from '../data/categories';
+import { CATEGORIES } from '@/data/categories';
 import { BotanicalCorner } from './BotanicalElements';
 import VerificationBadge from './VerificationBadge';
-
-// ============================================================
-// Article Detail Modal Component
-// ============================================================
 
 export default function ArticleDetail({ article, onClose }) {
   if (!article) return null;

@@ -987,9 +987,9 @@ if __name__ == "__main__":
     else:
         # Try common locations
         candidates = [
+            "data/articles.js",
             "src/data/articles.js",
             "src/components/articles.js",
-            "data/articles.js",
             "articles.js",
         ]
         path = None

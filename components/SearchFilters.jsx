@@ -1,10 +1,7 @@
-import { VERIFIED_ARTICLES } from '../data/articles';
+'use client';
+
 import CategoryPill from './CategoryPill';
 import { SearchIcon } from './BotanicalElements';
-
-// ============================================================
-// Search & Filter Controls Component
-// ============================================================
 
 export default function SearchFilters({
   search,
@@ -19,6 +16,7 @@ export default function SearchFilters({
   openAccessOnly,
   setOpenAccessOnly,
   filteredCount,
+  totalCount,
   categories,
 }) {
   return (
@@ -50,7 +48,7 @@ export default function SearchFilters({
         <CategoryPill
           name="All"
           color="var(--color-primary)"
-          count={VERIFIED_ARTICLES.length}
+          count={totalCount}
           active={!selectedCategory}
           onClick={() => setSelectedCategory(null)}
         />
@@ -73,7 +71,7 @@ export default function SearchFilters({
       {/* Sort, Study Type & Open Access Controls */}
       <div className="controls-row">
         <div className="controls-row__count">
-          Showing <strong>{filteredCount}</strong> of {VERIFIED_ARTICLES.length} articles
+          Showing <strong>{filteredCount}</strong> of {totalCount} articles
         </div>
         <div className="controls-row__right">
           <select

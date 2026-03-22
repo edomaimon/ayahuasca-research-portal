@@ -1,10 +1,6 @@
 import { LeafDivider } from './BotanicalElements';
 import VerificationBadge from './VerificationBadge';
 
-// ============================================================
-// Footer Component
-// ============================================================
-
 export default function Footer({ pubmedVerified }) {
   return (
     <footer className="footer">

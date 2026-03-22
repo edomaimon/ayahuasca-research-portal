@@ -1,9 +1,7 @@
-import { CATEGORIES } from '../data/categories';
-import VerificationBadge from './VerificationBadge';
+'use client';
 
-// ============================================================
-// Article Card Component
-// ============================================================
+import { CATEGORIES } from '@/data/categories';
+import VerificationBadge from './VerificationBadge';
 
 export default function ArticleCard({ article, onClick }) {
   const cat = CATEGORIES[article.category] || {};

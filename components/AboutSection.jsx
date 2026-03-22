@@ -1,9 +1,5 @@
 import { LeafDivider } from './BotanicalElements';
 
-// ============================================================
-// About Section Component
-// ============================================================
-
 export default function AboutSection() {
   return (
     <section className="about-section" id="about">
@@ -29,7 +25,7 @@ export default function AboutSection() {
             </p>
 
             <p className="about-section__text">
-              His clinical work at Rambam Hospital's Veterans Psychiatric
+              His clinical work at Rambam Hospital&apos;s Veterans Psychiatric
               Outpatient Clinic, over a decade of therapeutic practice with
               individuals and groups, and a personal journey of resilience as a
               cancer survivor inform his commitment to interdisciplinary,

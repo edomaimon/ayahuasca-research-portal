@@ -1,6 +1,4 @@
-// ============================================================
-// Category Pill Filter Component
-// ============================================================
+'use client';
 
 export default function CategoryPill({ name, color, count, active, onClick }) {
   return (

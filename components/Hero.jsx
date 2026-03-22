@@ -1,10 +1,8 @@
+'use client';
+
 import { useEffect, useRef } from 'react';
 import StatCard from './StatCard';
 import { LeafDivider, ScrollIndicator } from './BotanicalElements';
-
-// ============================================================
-// Hero Section Component
-// ============================================================
 
 export default function Hero({ stats }) {
   const videoRef = useRef(null);
