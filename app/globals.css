@@ -1873,3 +1873,165 @@ button {
     font-size: 1.3rem;
   }
 }
+
+/* ============================================================
+   Pagination
+   ============================================================ */
+
+.pagination {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 2rem 0 1rem;
+}
+
+.pagination__info {
+  font-size: 0.78rem;
+  color: var(--color-text-lighter);
+  font-family: var(--font-body);
+}
+
+.pagination__controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pagination__btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  background: #fff;
+  color: var(--color-text);
+  font-size: 0.78rem;
+  font-weight: 500;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pagination__btn:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.pagination__btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.pagination__pages {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pagination__page {
+  width: 34px;
+  height: 34px;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  background: #fff;
+  color: var(--color-text);
+  font-size: 0.78rem;
+  font-weight: 500;
+  font-family: var(--font-body);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.pagination__page:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.pagination__page--active {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+
+.pagination__page--active:hover {
+  background: var(--color-primary-dark);
+  color: #fff;
+}
+
+.pagination__ellipsis {
+  width: 24px;
+  text-align: center;
+  color: var(--color-text-lighter);
+  font-size: 0.85rem;
+}
+
+/* ============================================================
+   Skeleton Card
+   ============================================================ */
+
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: 200px 0; }
+}
+
+.skeleton-card {
+  background: #fff;
+  border-radius: 6px;
+  padding: 1.4rem 1.5rem;
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+  min-height: 180px;
+}
+
+.skeleton-card__accent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--color-border);
+}
+
+.skeleton-card__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.skeleton-card__bar {
+  height: 12px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--color-bg-subtle) 25%, var(--color-border-light) 50%, var(--color-bg-subtle) 75%);
+  background-size: 400px 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.skeleton-card__bar--xs { width: 60px; }
+.skeleton-card__bar--sm { width: 120px; }
+.skeleton-card__bar--md { width: 80%; height: 10px; }
+.skeleton-card__bar--lg { width: 100%; height: 14px; }
+
+/* Pagination responsive */
+@media (max-width: 480px) {
+  .pagination__controls {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .pagination__btn {
+    padding: 6px 12px;
+    font-size: 0.72rem;
+  }
+
+  .pagination__page {
+    width: 30px;
+    height: 30px;
+    font-size: 0.72rem;
+  }
+}

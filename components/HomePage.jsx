@@ -1,17 +1,18 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import Hero from './Hero';
 import SearchFilters from './SearchFilters';
 import ArticleCard from './ArticleCard';
+import Pagination from './Pagination';
+import SkeletonCard from './SkeletonCard';
 import Footer from './Footer';
 import AboutSection from './AboutSection';
 import Subscribe from './Subscribe';
 import { LeafDivider, leafPatternUrl } from './BotanicalElements';
 import { scoreRelevance } from '@/lib/searchUtils';
 
-// Modal kept for future quick-preview feature
-// import ArticleDetail from './ArticleDetail';
+const PAGE_SIZE = 24;
 
 export default function HomePage({ articles, stats, studyTypes, initialSearch }) {
   const [search, setSearch] = useState(initialSearch || '');
@@ -21,6 +22,9 @@ export default function HomePage({ articles, stats, studyTypes, initialSearch })
   const [openAccessOnly, setOpenAccessOnly] = useState(false);
   const [selectedTags, setSelectedTags] = useState([]);
   const [yearRange, setYearRange] = useState({ from: null, to: null });
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isPageTransition, setIsPageTransition] = useState(false);
+  const gridRef = useRef(null);
 
   // Auto-switch to relevance sort when search is active
   useEffect(() => {
@@ -31,10 +35,14 @@ export default function HomePage({ articles, stats, studyTypes, initialSearch })
     }
   }, [search]);
 
+  // Reset to page 1 when any filter changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, selectedCategory, selectedStudyType, sortBy, openAccessOnly, selectedTags, yearRange]);
+
   const filteredArticles = useMemo(() => {
     let result = [...articles];
 
-    // Text search
     if (search) {
       const q = search.toLowerCase();
       result = result.filter(
@@ -47,22 +55,18 @@ export default function HomePage({ articles, stats, studyTypes, initialSearch })
       );
     }
 
-    // Category filter
     if (selectedCategory) {
       result = result.filter((a) => a.category === selectedCategory);
     }
 
-    // Study type filter
     if (selectedStudyType) {
       result = result.filter((a) => a.studyType === selectedStudyType);
     }
 
-    // Open access filter
     if (openAccessOnly) {
       result = result.filter((a) => a.openAccess);
     }
 
-    // Tag filter (AND logic)
     if (selectedTags.length > 0) {
       result = result.filter((a) =>
         selectedTags.every(tag =>
@@ -71,7 +75,6 @@ export default function HomePage({ articles, stats, studyTypes, initialSearch })
       );
     }
 
-    // Year range filter
     if (yearRange.from) {
       result = result.filter((a) => a.year >= yearRange.from);
     }
@@ -79,7 +82,6 @@ export default function HomePage({ articles, stats, studyTypes, initialSearch })
       result = result.filter((a) => a.year <= yearRange.to);
     }
 
-    // Sorting
     switch (sortBy) {
       case 'relevance':
         if (search) {
@@ -108,17 +110,33 @@ export default function HomePage({ articles, stats, studyTypes, initialSearch })
     return result;
   }, [articles, search, selectedCategory, selectedStudyType, sortBy, openAccessOnly, selectedTags, yearRange]);
 
+  const totalPages = Math.ceil(filteredArticles.length / PAGE_SIZE);
+  const paginatedArticles = filteredArticles.slice(
+    (currentPage - 1) * PAGE_SIZE,
+    currentPage * PAGE_SIZE
+  );
+
+  const handlePageChange = useCallback((page) => {
+    setIsPageTransition(true);
+    setCurrentPage(page);
+
+    // Scroll to top of grid
+    if (gridRef.current) {
+      gridRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Brief loading state for visual feedback
+    setTimeout(() => setIsPageTransition(false), 150);
+  }, []);
+
   return (
     <>
-      {/* Hero Section */}
       <Hero stats={stats} />
 
-      {/* Main Content with botanical background */}
       <main
         className="main-content"
         style={{ backgroundImage: leafPatternUrl }}
       >
-        {/* Search & Filters */}
         <SearchFilters
           search={search}
           setSearch={setSearch}
@@ -141,20 +159,26 @@ export default function HomePage({ articles, stats, studyTypes, initialSearch })
           setYearRange={setYearRange}
         />
 
-        {/* Article Grid */}
-        <div className="grid-wrapper">
-          <div className="article-grid">
-            {filteredArticles.map((article) => (
-              <ArticleCard
-                key={article.id}
-                article={article}
-                searchQuery={search}
-              />
-            ))}
-          </div>
+        <div className="grid-wrapper" ref={gridRef}>
+          {isPageTransition ? (
+            <div className="article-grid">
+              {Array.from({ length: Math.min(PAGE_SIZE, filteredArticles.length) }, (_, i) => (
+                <SkeletonCard key={i} />
+              ))}
+            </div>
+          ) : (
+            <div className="article-grid">
+              {paginatedArticles.map((article) => (
+                <ArticleCard
+                  key={article.id}
+                  article={article}
+                  searchQuery={search}
+                />
+              ))}
+            </div>
+          )}
 
-          {/* No Results */}
-          {filteredArticles.length === 0 && (
+          {filteredArticles.length === 0 && !isPageTransition && (
             <div className="no-results">
               <LeafDivider />
               <div className="no-results__title">No articles found</div>
@@ -163,25 +187,20 @@ export default function HomePage({ articles, stats, studyTypes, initialSearch })
               </div>
             </div>
           )}
+
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            totalItems={filteredArticles.length}
+            pageSize={PAGE_SIZE}
+            onPageChange={handlePageChange}
+          />
         </div>
       </main>
 
-      {/* About Section */}
       <AboutSection />
-
-      {/* Newsletter Subscription */}
       <Subscribe />
-
-      {/* Footer */}
       <Footer pubmedVerified={stats.pubmedVerified} />
-
-      {/* Modal kept for future quick-preview feature */}
-      {/* {selectedArticle && (
-        <ArticleDetail
-          article={selectedArticle}
-          onClose={() => setSelectedArticle(null)}
-        />
-      )} */}
     </>
   );
 }
