@@ -45,7 +45,6 @@ export default function Hero({ stats }) {
           loop
           playsInline
           preload="auto"
-          poster="https://images.unsplash.com/photo-1440581572325-0bea30075d9d?w=1920&q=80"
           className="hero__video"
         >
           <source
