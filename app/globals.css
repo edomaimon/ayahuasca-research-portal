@@ -1406,3 +1406,311 @@ button {
     text-align: center;
   }
 }
+
+/* ============================================================
+   Search Autocomplete
+   ============================================================ */
+
+.search-autocomplete {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.search-autocomplete .search-bar {
+  margin-bottom: 0;
+}
+
+.search-autocomplete__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.search-autocomplete__group-label {
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-lighter);
+  padding: 10px 16px 4px;
+  font-family: var(--font-body);
+}
+
+.search-autocomplete__item {
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 0.84rem;
+  font-family: var(--font-body);
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.1s;
+}
+
+.search-autocomplete__item:hover,
+.search-autocomplete__item--highlighted {
+  background: var(--color-bg-subtle);
+}
+
+.search-autocomplete__item-text {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.search-autocomplete__item-arrow {
+  color: var(--color-text-lighter);
+  font-size: 1.2rem;
+  margin-left: 8px;
+}
+
+.search-autocomplete__match {
+  background: rgba(46, 90, 52, 0.15);
+  color: var(--color-primary);
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+/* ============================================================
+   Popular Tags
+   ============================================================ */
+
+.popular-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.popular-tags__label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-text-lighter);
+  font-family: var(--font-body);
+  margin-right: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.popular-tags__chip {
+  font-size: 0.7rem;
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  border: 1px solid var(--color-border);
+  background: #fff;
+  color: var(--color-text-light);
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.popular-tags__chip:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.popular-tags__chip--active {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+
+.popular-tags__chip--active:hover {
+  background: var(--color-primary-dark);
+  color: #fff;
+}
+
+.popular-tags__chip-x {
+  font-size: 0.85rem;
+  line-height: 1;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.popular-tags__chip-x:hover {
+  opacity: 1;
+}
+
+.popular-tags__clear {
+  font-size: 0.68rem;
+  color: var(--color-text-lighter);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  text-decoration: underline;
+  padding: 4px 6px;
+}
+
+.popular-tags__clear:hover {
+  color: var(--color-text);
+}
+
+/* ============================================================
+   Year Range Filter
+   ============================================================ */
+
+.year-range {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.year-range__label {
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+  font-family: var(--font-body);
+  font-weight: 500;
+}
+
+.year-range__input {
+  width: 68px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  font-size: 0.76rem;
+  font-family: var(--font-body);
+  background: #fff;
+  color: var(--color-text);
+  text-align: center;
+}
+
+.year-range__input:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+.year-range__input::-webkit-inner-spin-button,
+.year-range__input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.year-range__input {
+  -moz-appearance: textfield;
+}
+
+.year-range__sep {
+  font-size: 0.78rem;
+  color: var(--color-text-lighter);
+}
+
+.year-range__count {
+  font-size: 0.7rem;
+  color: var(--color-text-lighter);
+  font-family: var(--font-body);
+}
+
+.year-range__clear {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  font-size: 0.75rem;
+  color: var(--color-text-lighter);
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+}
+
+.year-range__clear:hover {
+  background: var(--color-bg-subtle);
+  color: var(--color-text);
+}
+
+/* ============================================================
+   Search Highlight
+   ============================================================ */
+
+.search-highlight {
+  background: rgba(46, 125, 82, 0.15);
+  padding: 1px 2px;
+  border-radius: 2px;
+  color: inherit;
+}
+
+/* ============================================================
+   Results Summary
+   ============================================================ */
+
+.results-summary {
+  font-size: 0.82rem;
+  color: var(--color-text-light);
+  font-family: var(--font-body);
+}
+
+.results-summary strong {
+  color: var(--color-text);
+}
+
+.results-summary__filters {
+  color: var(--color-text-lighter);
+  font-style: italic;
+}
+
+.results-summary__suggestion {
+  margin-top: 4px;
+  font-size: 0.78rem;
+  color: var(--color-text-lighter);
+}
+
+.results-summary__suggestion-link {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.results-summary__suggestion-link:hover {
+  color: var(--color-primary-dark);
+}
+
+/* ============================================================
+   Search Responsive Additions
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .year-range {
+    order: 10;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .controls-row__right {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .year-range {
+    width: 100%;
+  }
+
+  .search-autocomplete__dropdown {
+    max-height: 280px;
+  }
+}

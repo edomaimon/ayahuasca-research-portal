@@ -3,9 +3,12 @@
 import Link from 'next/link';
 import { CATEGORIES } from '@/data/categories';
 import VerificationBadge from './VerificationBadge';
+import HighlightedText from './HighlightedText';
 
-export default function ArticleCard({ article }) {
+export default function ArticleCard({ article, searchQuery }) {
   const cat = CATEGORIES[article.category] || {};
+  const authorsText = (article.authors?.slice(0, 3).join(', ') || '') +
+    (article.authors?.length > 3 ? ' et al.' : '');
 
   return (
     <Link href={`/articles/${article.slug}`} className="article-card">
@@ -25,11 +28,12 @@ export default function ArticleCard({ article }) {
         <VerificationBadge type={article.verification} />
       </div>
 
-      <h3 className="article-card__title">{article.title}</h3>
+      <h3 className="article-card__title">
+        <HighlightedText text={article.title} query={searchQuery} />
+      </h3>
 
       <div className="article-card__authors">
-        {article.authors?.slice(0, 3).join(', ')}
-        {article.authors?.length > 3 ? ' et al.' : ''}
+        <HighlightedText text={authorsText} query={searchQuery} />
       </div>
 
       <div className="article-card__meta">

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import Hero from './Hero';
 import SearchFilters from './SearchFilters';
 import ArticleCard from './ArticleCard';
@@ -8,6 +8,7 @@ import Footer from './Footer';
 import AboutSection from './AboutSection';
 import Subscribe from './Subscribe';
 import { LeafDivider, leafPatternUrl } from './BotanicalElements';
+import { scoreRelevance } from '@/lib/searchUtils';
 
 // Modal kept for future quick-preview feature
 // import ArticleDetail from './ArticleDetail';
@@ -18,9 +19,17 @@ export default function HomePage({ articles, stats, studyTypes, initialSearch })
   const [selectedStudyType, setSelectedStudyType] = useState(null);
   const [sortBy, setSortBy] = useState('newest');
   const [openAccessOnly, setOpenAccessOnly] = useState(false);
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [yearRange, setYearRange] = useState({ from: null, to: null });
 
-  // Modal state kept for future quick-preview feature
-  // const [selectedArticle, setSelectedArticle] = useState(null);
+  // Auto-switch to relevance sort when search is active
+  useEffect(() => {
+    if (search) {
+      setSortBy('relevance');
+    } else {
+      setSortBy(prev => prev === 'relevance' ? 'newest' : prev);
+    }
+  }, [search]);
 
   const filteredArticles = useMemo(() => {
     let result = [...articles];
@@ -53,8 +62,35 @@ export default function HomePage({ articles, stats, studyTypes, initialSearch })
       result = result.filter((a) => a.openAccess);
     }
 
+    // Tag filter (AND logic)
+    if (selectedTags.length > 0) {
+      result = result.filter((a) =>
+        selectedTags.every(tag =>
+          a.keywords?.some(k => k.toLowerCase() === tag.toLowerCase())
+        )
+      );
+    }
+
+    // Year range filter
+    if (yearRange.from) {
+      result = result.filter((a) => a.year >= yearRange.from);
+    }
+    if (yearRange.to) {
+      result = result.filter((a) => a.year <= yearRange.to);
+    }
+
     // Sorting
     switch (sortBy) {
+      case 'relevance':
+        if (search) {
+          result.sort((a, b) => {
+            const diff = scoreRelevance(b, search) - scoreRelevance(a, search);
+            return diff !== 0 ? diff : b.year - a.year;
+          });
+        } else {
+          result.sort((a, b) => b.year - a.year);
+        }
+        break;
       case 'newest':
         result.sort((a, b) => b.year - a.year);
         break;
@@ -70,7 +106,7 @@ export default function HomePage({ articles, stats, studyTypes, initialSearch })
     }
 
     return result;
-  }, [articles, search, selectedCategory, selectedStudyType, sortBy, openAccessOnly]);
+  }, [articles, search, selectedCategory, selectedStudyType, sortBy, openAccessOnly, selectedTags, yearRange]);
 
   return (
     <>
@@ -98,6 +134,11 @@ export default function HomePage({ articles, stats, studyTypes, initialSearch })
           filteredCount={filteredArticles.length}
           totalCount={articles.length}
           categories={stats.categories}
+          articles={articles}
+          selectedTags={selectedTags}
+          setSelectedTags={setSelectedTags}
+          yearRange={yearRange}
+          setYearRange={setYearRange}
         />
 
         {/* Article Grid */}
@@ -107,6 +148,7 @@ export default function HomePage({ articles, stats, studyTypes, initialSearch })
               <ArticleCard
                 key={article.id}
                 article={article}
+                searchQuery={search}
               />
             ))}
           </div>

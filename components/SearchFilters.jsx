@@ -1,7 +1,10 @@
 'use client';
 
 import CategoryPill from './CategoryPill';
-import { SearchIcon } from './BotanicalElements';
+import SearchAutocomplete from './SearchAutocomplete';
+import PopularTags from './PopularTags';
+import YearRangeFilter from './YearRangeFilter';
+import ResultsSummary from './ResultsSummary';
 
 export default function SearchFilters({
   search,
@@ -18,6 +21,11 @@ export default function SearchFilters({
   filteredCount,
   totalCount,
   categories,
+  articles,
+  selectedTags,
+  setSelectedTags,
+  yearRange,
+  setYearRange,
 }) {
   return (
     <div className="search-section">
@@ -29,19 +37,19 @@ export default function SearchFilters({
         </p>
       </div>
 
-      {/* Search Bar */}
-      <div className="search-bar">
-        <input
-          type="text"
-          className="search-bar__input"
-          placeholder="Search by title, author, journal, or keyword..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <span className="search-bar__icon">
-          <SearchIcon />
-        </span>
-      </div>
+      {/* Search Bar with Autocomplete */}
+      <SearchAutocomplete
+        search={search}
+        setSearch={setSearch}
+        articles={articles}
+      />
+
+      {/* Popular Tags */}
+      <PopularTags
+        articles={articles}
+        selectedTags={selectedTags}
+        setSelectedTags={setSelectedTags}
+      />
 
       {/* Category Filter Pills */}
       <div className="filter-row">
@@ -68,12 +76,25 @@ export default function SearchFilters({
           ))}
       </div>
 
-      {/* Sort, Study Type & Open Access Controls */}
+      {/* Sort, Study Type, Year Range & Open Access Controls */}
       <div className="controls-row">
-        <div className="controls-row__count">
-          Showing <strong>{filteredCount}</strong> of {totalCount} articles
-        </div>
+        <ResultsSummary
+          search={search}
+          filteredCount={filteredCount}
+          totalCount={totalCount}
+          selectedCategory={selectedCategory}
+          selectedTags={selectedTags}
+          yearRange={yearRange}
+          openAccessOnly={openAccessOnly}
+          articles={articles}
+          setSearch={setSearch}
+        />
         <div className="controls-row__right">
+          <YearRangeFilter
+            yearRange={yearRange}
+            setYearRange={setYearRange}
+            articles={articles}
+          />
           <select
             className="controls-row__select"
             value={selectedStudyType || ''}
@@ -99,6 +120,7 @@ export default function SearchFilters({
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
           >
+            {search && <option value="relevance">Relevance</option>}
             <option value="newest">Newest first</option>
             <option value="oldest">Oldest first</option>
             <option value="cited">Most cited</option>
