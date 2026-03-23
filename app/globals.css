@@ -1714,3 +1714,162 @@ button {
     max-height: 280px;
   }
 }
+
+/* ============================================================
+   Author Page
+   ============================================================ */
+
+.author-page-wrapper {
+  background: var(--color-bg);
+  min-height: 100vh;
+}
+
+.author-page {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.author-page__name {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-text);
+  font-family: var(--font-display);
+  margin-bottom: 0.5rem;
+}
+
+.author-page__count {
+  font-size: 0.88rem;
+  color: var(--color-text-light);
+  font-family: var(--font-body);
+  margin-bottom: 1.5rem;
+}
+
+.author-page__year-group {
+  margin-top: 1.5rem;
+}
+
+.author-page__year {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-lighter);
+  font-family: var(--font-body);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.author-page__articles {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+/* Author link on article pages */
+.article-page__author-link {
+  color: var(--color-text-light);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.article-page__author-link:hover {
+  color: var(--color-primary);
+  opacity: 1;
+}
+
+/* ============================================================
+   Journals Page
+   ============================================================ */
+
+.journals-page-wrapper {
+  background: var(--color-bg);
+  min-height: 100vh;
+}
+
+.journals-page {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.journals-page__title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-text);
+  font-family: var(--font-display);
+  margin-bottom: 0.5rem;
+}
+
+.journals-page__subtitle {
+  font-size: 0.88rem;
+  color: var(--color-text-light);
+  font-family: var(--font-body);
+  margin-bottom: 1.5rem;
+}
+
+.journals-page__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 1.5rem;
+}
+
+.journals-page__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--color-border-light);
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.journals-page__item:first-child {
+  border-top: 1px solid var(--color-border-light);
+}
+
+.journals-page__item:hover {
+  background: #fff;
+  opacity: 1;
+}
+
+.journals-page__item-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.journals-page__item-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+
+.journals-page__item-years {
+  font-size: 0.72rem;
+  color: var(--color-text-lighter);
+  font-family: var(--font-body);
+}
+
+.journals-page__item-count {
+  font-size: 0.75rem;
+  color: var(--color-text-lighter);
+  font-family: var(--font-body);
+  white-space: nowrap;
+  margin-left: 16px;
+}
+
+@media (max-width: 768px) {
+  .author-page,
+  .journals-page {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .author-page__name,
+  .journals-page__title {
+    font-size: 1.3rem;
+  }
+}
