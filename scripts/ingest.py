@@ -854,12 +854,78 @@ def send_buttondown_newsletter(subject, html_body, api_key):
 # MAIN PIPELINE
 # ============================================================
 
+def generate_slug(title):
+    """Generate a URL-safe slug from a title."""
+    import unicodedata
+    slug = title.lower()
+    slug = re.sub(r'[^a-z0-9\s-]', '', slug)
+    slug = re.sub(r'\s+', '-', slug)
+    slug = re.sub(r'-+', '-', slug)
+    slug = slug.strip('-')
+    return slug[:80].rstrip('-')
+
+
+def insert_to_supabase(articles, supabase_url, supabase_key):
+    """Insert validated articles directly into Supabase, skipping duplicates."""
+    if not supabase_url or not supabase_key:
+        log.warning("Supabase credentials not set, skipping database insert")
+        return 0
+
+    headers = {
+        "apikey": supabase_key,
+        "Authorization": f"Bearer {supabase_key}",
+        "Content-Type": "application/json",
+        "Prefer": "resolution=ignore-duplicates",
+    }
+
+    inserted = 0
+    for art in articles:
+        slug = generate_slug(art["title"])
+        row = {
+            "title": art["title"],
+            "slug": slug,
+            "authors": art.get("authors", []),
+            "journal": art.get("journal", ""),
+            "year": art.get("year", 0),
+            "doi": art.get("doi"),
+            "pmid": art.get("pmid"),
+            "abstract": art.get("abstract", ""),
+            "category": art.get("_category", "Psychology"),
+            "tags": art.get("_keywords", []),
+            "citations": 0,
+            "verification": "PubMed-Auto",
+            "study_type": art.get("_study_type"),
+            "open_access": art.get("open_access", False),
+        }
+
+        try:
+            data = json.dumps(row).encode("utf-8")
+            url = f"{supabase_url}/rest/v1/articles"
+            req = Request(url, data=data, headers=headers, method="POST")
+            with urlopen(req, timeout=15) as resp:
+                if resp.status in (200, 201):
+                    inserted += 1
+                    log.info(f"  📦 Supabase: inserted '{art['title'][:50]}...'")
+        except HTTPError as e:
+            body = e.read().decode("utf-8", errors="replace")
+            if "duplicate" in body.lower() or e.code == 409:
+                log.info(f"  ⏭️  Supabase: duplicate skipped (DOI: {art.get('doi', 'N/A')})")
+            else:
+                log.error(f"  ❌ Supabase insert failed ({e.code}): {body[:200]}")
+        except Exception as e:
+            log.error(f"  ❌ Supabase insert error: {e}")
+
+    return inserted
+
+
 def run_ingestion(articles_path, days_back=15, dry_run=False, send_digest=False):
     """Main ingestion pipeline."""
-    
+
     # Get API keys from environment
     pubmed_api_key = os.environ.get("PUBMED_API_KEY", "")
     buttondown_api_key = os.environ.get("BUTTONDOWN_API_KEY", "")
+    supabase_url = os.environ.get("SUPABASE_URL", os.environ.get("NEXT_PUBLIC_SUPABASE_URL", ""))
+    supabase_key = os.environ.get("SUPABASE_SERVICE_KEY", os.environ.get("SUPABASE_SERVICE_ROLE_KEY", ""))
     
     # Step 1: Read existing database
     log.info("=" * 60)
@@ -930,14 +996,21 @@ def run_ingestion(articles_path, days_back=15, dry_run=False, send_digest=False)
             log.info(f"\n{entry[:200]}...")
         return validated
     
-    # Step 7: Write to articles.js
+    # Step 7: Write to articles.js (backup/fallback)
     log.info(f"\nAppending {len(new_entries)} entries to {articles_path}...")
     success = append_to_articles_js(articles_path, new_entries, existing)
     if success:
-        log.info(f"✅ Database updated: {existing['count']} → {existing['count'] + len(new_entries)} articles")
+        log.info(f"✅ articles.js updated: {existing['count']} → {existing['count'] + len(new_entries)} articles")
     else:
         log.error("❌ Failed to update articles.js")
-        return []
+
+    # Step 7b: Insert into Supabase
+    if supabase_url and supabase_key:
+        log.info(f"\nInserting {len(validated)} articles into Supabase...")
+        sb_count = insert_to_supabase(validated, supabase_url, supabase_key)
+        log.info(f"✅ Supabase: {sb_count} articles inserted")
+    else:
+        log.info("ℹ️  Supabase credentials not set, skipping database insert")
     
     # Step 8: Generate digest
     digest_md, digest_html = generate_digest(validated, existing["count"])

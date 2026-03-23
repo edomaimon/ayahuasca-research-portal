@@ -1,10 +1,12 @@
-import { VERIFIED_ARTICLES } from '@/data/articles';
+import { getAllArticles } from '@/lib/articles';
 import { generateAuthorSlug } from '@/lib/utils';
 
 const SITE_URL = 'https://www.ayahuasca-research.com';
 
-export default function sitemap() {
-  const articleUrls = VERIFIED_ARTICLES.map(article => ({
+export default async function sitemap() {
+  const articles = await getAllArticles();
+
+  const articleUrls = articles.map(article => ({
     url: `${SITE_URL}/articles/${article.slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly',
@@ -13,7 +15,7 @@ export default function sitemap() {
 
   // Unique author slugs
   const authorSlugs = new Set();
-  VERIFIED_ARTICLES.forEach(a => {
+  articles.forEach(a => {
     (a.authors || []).forEach(name => authorSlugs.add(generateAuthorSlug(name)));
   });
   const authorUrls = [...authorSlugs].map(slug => ({

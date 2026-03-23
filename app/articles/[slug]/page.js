@@ -1,40 +1,21 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { VERIFIED_ARTICLES } from '@/data/articles';
+import { getArticleBySlug, getRelatedArticles, getAllSlugs } from '@/lib/articles';
 import { CATEGORIES } from '@/data/categories';
 import VerificationBadge from '@/components/VerificationBadge';
 import { LeafDivider } from '@/components/BotanicalElements';
 import { generateAuthorSlug } from '@/lib/utils';
 
-function getRelatedArticles(article) {
-  return VERIFIED_ARTICLES
-    .filter(a => a.id !== article.id)
-    .map(a => {
-      let score = 0;
-      if (a.category === article.category) score += 3;
-      if (article.keywords && a.keywords) {
-        score += a.keywords.filter(k => article.keywords.includes(k)).length * 2;
-      }
-      if (a.journal === article.journal) score += 1;
-      if (Math.abs(a.year - article.year) <= 2) score += 1;
-      return { ...a, score };
-    })
-    .filter(a => a.score > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 4);
-}
-
 export async function generateStaticParams() {
-  return VERIFIED_ARTICLES.map(article => ({
-    slug: article.slug,
-  }));
+  const slugs = await getAllSlugs();
+  return slugs.map(slug => ({ slug }));
 }
 
 const SITE_URL = 'https://www.ayahuasca-research.com';
 
 export async function generateMetadata({ params }) {
   const { slug } = params;
-  const article = VERIFIED_ARTICLES.find(a => a.slug === slug);
+  const article = await getArticleBySlug(slug);
   if (!article) return { title: 'Article Not Found' };
 
   const description = article.abstract
@@ -64,13 +45,13 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function ArticlePage({ params }) {
+export default async function ArticlePage({ params }) {
   const { slug } = params;
-  const article = VERIFIED_ARTICLES.find(a => a.slug === slug);
+  const article = await getArticleBySlug(slug);
   if (!article) notFound();
 
   const cat = CATEGORIES[article.category] || {};
-  const related = getRelatedArticles(article);
+  const related = await getRelatedArticles(article);
   const truncatedTitle = article.title.length > 50
     ? article.title.slice(0, 50) + '...'
     : article.title;

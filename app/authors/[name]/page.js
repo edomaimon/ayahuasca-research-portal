@@ -1,16 +1,16 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { VERIFIED_ARTICLES } from '@/data/articles';
+import { getAllArticles } from '@/lib/articles';
 import { CATEGORIES } from '@/data/categories';
 import { generateAuthorSlug } from '@/lib/utils';
-import VerificationBadge from '@/components/VerificationBadge';
 import { LeafDivider } from '@/components/BotanicalElements';
 
 const SITE_URL = 'https://www.ayahuasca-research.com';
 
-function getAllAuthors() {
+async function getAllAuthors() {
+  const articles = await getAllArticles();
   const map = {};
-  VERIFIED_ARTICLES.forEach(a => {
+  articles.forEach(a => {
     (a.authors || []).forEach(name => {
       const slug = generateAuthorSlug(name);
       if (!map[slug]) map[slug] = { name, slug, articles: [] };
@@ -20,14 +20,14 @@ function getAllAuthors() {
   return map;
 }
 
-const AUTHORS = getAllAuthors();
-
 export async function generateStaticParams() {
-  return Object.keys(AUTHORS).map(name => ({ name }));
+  const authors = await getAllAuthors();
+  return Object.keys(authors).map(name => ({ name }));
 }
 
 export async function generateMetadata({ params }) {
-  const author = AUTHORS[params.name];
+  const authors = await getAllAuthors();
+  const author = authors[params.name];
   if (!author) return { title: 'Author Not Found' };
 
   return {
@@ -41,8 +41,9 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default function AuthorPage({ params }) {
-  const author = AUTHORS[params.name];
+export default async function AuthorPage({ params }) {
+  const authors = await getAllAuthors();
+  const author = authors[params.name];
   if (!author) notFound();
 
   // Group articles by year, newest first

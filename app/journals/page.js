@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { VERIFIED_ARTICLES } from '@/data/articles';
+import { getAllArticles } from '@/lib/articles';
 import { LeafDivider } from '@/components/BotanicalElements';
 
 const SITE_URL = 'https://www.ayahuasca-research.com';
@@ -10,23 +10,21 @@ export const metadata = {
   alternates: { canonical: '/journals' },
 };
 
-function getJournals() {
+export default async function JournalsPage() {
+  const articles = await getAllArticles();
+
   const map = {};
-  VERIFIED_ARTICLES.forEach(a => {
+  articles.forEach(a => {
     if (!map[a.journal]) map[a.journal] = { name: a.journal, count: 0, years: [] };
     map[a.journal].count++;
     map[a.journal].years.push(a.year);
   });
-  return Object.values(map)
+  const journals = Object.values(map)
     .map(j => ({
       ...j,
       yearRange: `${Math.min(...j.years)}-${Math.max(...j.years)}`,
     }))
     .sort((a, b) => b.count - a.count);
-}
-
-export default function JournalsPage() {
-  const journals = getJournals();
 
   const jsonLd = {
     '@context': 'https://schema.org',

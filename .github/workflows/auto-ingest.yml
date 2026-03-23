@@ -8,6 +8,8 @@
 # Required GitHub Secrets:
 #   PUBMED_API_KEY     — Free from https://www.ncbi.nlm.nih.gov/account/
 #   BUTTONDOWN_API_KEY — From https://buttondown.com/settings/api
+#   SUPABASE_URL       — Supabase project URL
+#   SUPABASE_SERVICE_KEY — Supabase service role key
 # =============================================================
 
 name: Auto-Ingest New Articles
@@ -60,6 +62,8 @@ jobs:
         env:
           PUBMED_API_KEY: ${{ secrets.PUBMED_API_KEY }}
           BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
         run: |
           DAYS="${{ github.event.inputs.days_back || '15' }}"
           DRY_RUN="${{ github.event.inputs.dry_run || 'false' }}"
