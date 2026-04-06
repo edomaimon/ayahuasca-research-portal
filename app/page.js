@@ -1,14 +1,16 @@
-import { getAllArticles, getArticleStats, getStudyTypes } from '@/lib/articles';
+import { getAllArticles, getArticleStats, getStudyTypes, getFeaturedArticles, getUniqueAuthorsCount } from '@/lib/articles';
 import { CATEGORIES } from '@/data/categories';
 import HomePage from '@/components/HomePage';
 
 const SITE_URL = 'https://www.ayahuasca-research.com';
 
 export default async function Page({ searchParams }) {
-  const [articles, stats, studyTypes] = await Promise.all([
+  const [articles, stats, studyTypes, featuredArticles, uniqueAuthors] = await Promise.all([
     getAllArticles(),
     getArticleStats(),
     getStudyTypes(),
+    getFeaturedArticles(),
+    getUniqueAuthorsCount(),
   ]);
 
   const initialSearch = searchParams?.search || '';
@@ -41,6 +43,8 @@ export default async function Page({ searchParams }) {
         stats={stats}
         studyTypes={studyTypes}
         initialSearch={initialSearch}
+        featuredArticles={featuredArticles}
+        uniqueAuthors={uniqueAuthors}
       />
     </>
   );

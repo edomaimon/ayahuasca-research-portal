@@ -2,6 +2,8 @@
 
 import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import Hero from './Hero';
+import FeaturedArticles from './FeaturedArticles';
+import StatsBar from './StatsBar';
 import SearchFilters from './SearchFilters';
 import ArticleCard from './ArticleCard';
 import Pagination from './Pagination';
@@ -14,7 +16,7 @@ import { scoreRelevance } from '@/lib/searchUtils';
 
 const PAGE_SIZE = 24;
 
-export default function HomePage({ articles, stats, studyTypes, initialSearch }) {
+export default function HomePage({ articles, stats, studyTypes, initialSearch, featuredArticles, uniqueAuthors }) {
   const [search, setSearch] = useState(initialSearch || '');
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedStudyType, setSelectedStudyType] = useState(null);
@@ -133,6 +135,12 @@ export default function HomePage({ articles, stats, studyTypes, initialSearch })
     <>
       <Hero stats={stats} />
 
+      {/* Featured Articles */}
+      <FeaturedArticles articles={featuredArticles} />
+
+      {/* Stats Overview */}
+      <StatsBar stats={stats} uniqueAuthors={uniqueAuthors} />
+
       <main
         className="main-content"
         style={{ backgroundImage: leafPatternUrl }}
@@ -185,6 +193,71 @@ export default function HomePage({ articles, stats, studyTypes, initialSearch })
               <div className="no-results__text">
                 Try adjusting your search terms or filters
               </div>
+              <div className="no-results__suggestions">
+                {search && (
+                  <button
+                    className="no-results__filter-btn"
+                    onClick={() => setSearch('')}
+                  >
+                    Clear search &ldquo;{search}&rdquo;
+                  </button>
+                )}
+                {selectedCategory && (
+                  <button
+                    className="no-results__filter-btn"
+                    onClick={() => setSelectedCategory(null)}
+                  >
+                    Remove &ldquo;{selectedCategory}&rdquo; filter
+                  </button>
+                )}
+                {selectedStudyType && (
+                  <button
+                    className="no-results__filter-btn"
+                    onClick={() => setSelectedStudyType(null)}
+                  >
+                    Remove &ldquo;{selectedStudyType}&rdquo; filter
+                  </button>
+                )}
+                {openAccessOnly && (
+                  <button
+                    className="no-results__filter-btn"
+                    onClick={() => setOpenAccessOnly(false)}
+                  >
+                    Remove Open Access filter
+                  </button>
+                )}
+                {selectedTags.length > 0 && (
+                  <button
+                    className="no-results__filter-btn"
+                    onClick={() => setSelectedTags([])}
+                  >
+                    Clear all tags
+                  </button>
+                )}
+                {(yearRange.from || yearRange.to) && (
+                  <button
+                    className="no-results__filter-btn"
+                    onClick={() => setYearRange({ from: null, to: null })}
+                  >
+                    Clear year range
+                  </button>
+                )}
+              </div>
+              {(search || selectedCategory || selectedStudyType || openAccessOnly || selectedTags.length > 0 || yearRange.from || yearRange.to) && (
+                <button
+                  className="no-results__clear-all"
+                  onClick={() => {
+                    setSearch('');
+                    setSelectedCategory(null);
+                    setSelectedStudyType(null);
+                    setOpenAccessOnly(false);
+                    setSelectedTags([]);
+                    setYearRange({ from: null, to: null });
+                  }}
+                >
+                  Clear all filters
+                </button>
+              )}
             </div>
           )}
 

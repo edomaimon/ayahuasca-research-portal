@@ -5,10 +5,17 @@ import { CATEGORIES } from '@/data/categories';
 import VerificationBadge from './VerificationBadge';
 import HighlightedText from './HighlightedText';
 
+function isNew(createdAt) {
+  if (!createdAt) return false;
+  const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000;
+  return new Date(createdAt).getTime() > thirtyDaysAgo;
+}
+
 export default function ArticleCard({ article, searchQuery }) {
   const cat = CATEGORIES[article.category] || {};
   const authorsText = (article.authors?.slice(0, 3).join(', ') || '') +
     (article.authors?.length > 3 ? ' et al.' : '');
+  const recentlyAdded = isNew(article.createdAt);
 
   return (
     <Link href={`/articles/${article.slug}`} className="article-card">
@@ -25,7 +32,10 @@ export default function ArticleCard({ article, searchQuery }) {
         >
           {article.category}
         </span>
-        <VerificationBadge type={article.verification} />
+        <div className="article-card__header-right">
+          {recentlyAdded && <span className="article-card__new-badge">New</span>}
+          <VerificationBadge type={article.verification} />
+        </div>
       </div>
 
       <h3 className="article-card__title">

@@ -1,10 +1,13 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getArticleBySlug, getRelatedArticles, getAllSlugs } from '@/lib/articles';
+import { getArticleBySlug, getRelatedArticles, getAllSlugs, getAdjacentArticles } from '@/lib/articles';
 import { CATEGORIES } from '@/data/categories';
 import VerificationBadge from '@/components/VerificationBadge';
 import { LeafDivider } from '@/components/BotanicalElements';
 import { generateAuthorSlug } from '@/lib/utils';
+import CiteButton from '@/components/CiteButton';
+import ShareButtons from '@/components/ShareButtons';
+import BackToTop from '@/components/BackToTop';
 
 export async function generateStaticParams() {
   const slugs = await getAllSlugs();
@@ -51,7 +54,10 @@ export default async function ArticlePage({ params }) {
   if (!article) notFound();
 
   const cat = CATEGORIES[article.category] || {};
-  const related = await getRelatedArticles(article);
+  const [related, adjacent] = await Promise.all([
+    getRelatedArticles(article),
+    getAdjacentArticles(article),
+  ]);
   const truncatedTitle = article.title.length > 50
     ? article.title.slice(0, 50) + '...'
     : article.title;
@@ -112,6 +118,12 @@ export default async function ArticlePage({ params }) {
 
           <h1 className="article-page__title">{article.title}</h1>
 
+          {/* Share + Cite row */}
+          <div className="article-page__actions">
+            <ShareButtons article={article} />
+            <CiteButton article={article} />
+          </div>
+
           <p className="article-page__authors">
             {article.authors?.map((author, i) => (
               <span key={author}>
@@ -131,6 +143,8 @@ export default async function ArticlePage({ params }) {
           </p>
         </header>
 
+        <div className="article-page__divider" />
+
         {/* Study type */}
         {article.studyType && (
           <div className="article-page__study-type">{article.studyType}</div>
@@ -146,6 +160,8 @@ export default async function ArticlePage({ params }) {
             <p>{article.abstract}</p>
           </div>
         )}
+
+        <div className="article-page__divider" />
 
         {/* Details */}
         <div className="article-page__details">
@@ -177,17 +193,20 @@ export default async function ArticlePage({ params }) {
 
         {/* Keywords */}
         {article.keywords?.length > 0 && (
-          <div className="article-page__keywords">
-            {article.keywords.map(k => (
-              <Link
-                key={k}
-                href={`/?search=${encodeURIComponent(k)}`}
-                className="article-page__keyword"
-              >
-                {k}
-              </Link>
-            ))}
-          </div>
+          <>
+            <div className="article-page__divider" />
+            <div className="article-page__keywords">
+              {article.keywords.map(k => (
+                <Link
+                  key={k}
+                  href={`/?search=${encodeURIComponent(k)}`}
+                  className="article-page__keyword"
+                >
+                  {k}
+                </Link>
+              ))}
+            </div>
+          </>
         )}
 
         {/* External links */}
@@ -222,6 +241,24 @@ export default async function ArticlePage({ params }) {
             </a>
           ) : null}
         </div>
+
+        {/* Previous / Next navigation */}
+        {(adjacent.prev || adjacent.next) && (
+          <nav className="article-page__nav">
+            {adjacent.prev ? (
+              <Link href={`/articles/${adjacent.prev.slug}`} className="article-page__nav-link article-page__nav-link--prev">
+                <span className="article-page__nav-label">&larr; Previous</span>
+                <span className="article-page__nav-title">{adjacent.prev.title}</span>
+              </Link>
+            ) : <div />}
+            {adjacent.next ? (
+              <Link href={`/articles/${adjacent.next.slug}`} className="article-page__nav-link article-page__nav-link--next">
+                <span className="article-page__nav-label">Next &rarr;</span>
+                <span className="article-page__nav-title">{adjacent.next.title}</span>
+              </Link>
+            ) : <div />}
+          </nav>
+        )}
 
         {/* Related Articles */}
         {related.length > 0 && (
@@ -262,6 +299,8 @@ export default async function ArticlePage({ params }) {
           </section>
         )}
       </article>
+
+      <BackToTop />
     </div>
   );
 }
