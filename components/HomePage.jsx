@@ -2,7 +2,6 @@
 
 import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import Hero from './Hero';
-import FeaturedArticles from './FeaturedArticles';
 import StatsBar from './StatsBar';
 import SearchFilters from './SearchFilters';
 import ArticleCard from './ArticleCard';
@@ -17,11 +16,11 @@ import { scoreRelevance } from '@/lib/searchUtils';
 
 const PAGE_SIZE = 24;
 
-export default function HomePage({ articles, stats, studyTypes, initialSearch, featuredArticles, uniqueAuthors }) {
+export default function HomePage({ articles, stats, studyTypes, initialSearch, uniqueAuthors }) {
   const [search, setSearch] = useState(initialSearch || '');
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedStudyType, setSelectedStudyType] = useState(null);
-  const [sortBy, setSortBy] = useState('newest');
+  const [sortBy, setSortBy] = useState('recent');
   const [openAccessOnly, setOpenAccessOnly] = useState(false);
   const [selectedTags, setSelectedTags] = useState([]);
   const [yearRange, setYearRange] = useState({ from: null, to: null });
@@ -34,7 +33,7 @@ export default function HomePage({ articles, stats, studyTypes, initialSearch, f
     if (search) {
       setSortBy('relevance');
     } else {
-      setSortBy(prev => prev === 'relevance' ? 'newest' : prev);
+      setSortBy(prev => prev === 'relevance' ? 'recent' : prev);
     }
   }, [search]);
 
@@ -96,6 +95,13 @@ export default function HomePage({ articles, stats, studyTypes, initialSearch, f
           result.sort((a, b) => b.year - a.year);
         }
         break;
+      case 'recent':
+        result.sort((a, b) => {
+          const aDate = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+          const bDate = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+          return bDate - aDate || b.year - a.year;
+        });
+        break;
       case 'newest':
         result.sort((a, b) => b.year - a.year);
         break;
@@ -135,9 +141,6 @@ export default function HomePage({ articles, stats, studyTypes, initialSearch, f
   return (
     <>
       <Hero stats={stats} />
-
-      {/* Featured Articles */}
-      <FeaturedArticles articles={featuredArticles} />
 
       {/* Stats Overview */}
       <StatsBar stats={stats} uniqueAuthors={uniqueAuthors} />

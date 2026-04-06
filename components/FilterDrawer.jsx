@@ -140,6 +140,7 @@ export default function FilterDrawer({
               onChange={(e) => setSortBy(e.target.value)}
             >
               {search && <option value="relevance">Relevance</option>}
+              <option value="recent">Recently Added</option>
               <option value="newest">Newest first</option>
               <option value="oldest">Oldest first</option>
               <option value="cited">Most cited</option>
