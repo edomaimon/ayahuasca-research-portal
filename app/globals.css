@@ -2569,3 +2569,332 @@ button {
     height: 36px;
   }
 }
+
+/* ============================================================
+   Hero Poster (mobile fallback)
+   ============================================================ */
+
+.hero__poster {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+/* ============================================================
+   Mobile Filter Drawer
+   ============================================================ */
+
+/* Trigger button — hidden on desktop */
+.search-section__mobile-trigger {
+  display: none;
+}
+
+.search-section__mobile-count {
+  display: none;
+}
+
+.search-section__search-row {
+  display: contents;
+}
+
+.filter-drawer-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background: #fff;
+  color: var(--color-text);
+  font-size: 0.82rem;
+  font-weight: 500;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  min-height: 44px;
+}
+
+.filter-drawer-trigger:active {
+  transform: scale(0.97);
+}
+
+.filter-drawer-trigger__badge {
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+}
+
+/* Drawer itself */
+.filter-drawer__backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 200;
+  animation: fadeIn 0.2s ease;
+}
+
+.filter-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 85%;
+  max-width: 380px;
+  background: var(--color-bg);
+  z-index: 201;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
+}
+
+.filter-drawer--open {
+  transform: translateX(0);
+}
+
+.filter-drawer__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.filter-drawer__title {
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--font-display);
+  color: var(--color-text);
+  margin: 0;
+}
+
+.filter-drawer__close {
+  background: none;
+  border: none;
+  color: var(--color-text-lighter);
+  cursor: pointer;
+  padding: 4px;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-drawer__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 20px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.filter-drawer__section {
+  margin-bottom: 1.5rem;
+}
+
+.filter-drawer__section-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-lighter);
+  font-family: var(--font-body);
+  margin-bottom: 0.5rem;
+}
+
+.filter-drawer__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.filter-drawer__select {
+  width: 100%;
+  padding: 10px 12px;
+  min-height: 44px;
+}
+
+.filter-drawer__footer {
+  padding: 16px 20px;
+  border-top: 1px solid var(--color-border-light);
+  display: flex;
+  gap: 10px;
+}
+
+.filter-drawer__clear {
+  flex: 0 0 auto;
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background: #fff;
+  color: var(--color-text-light);
+  font-size: 0.82rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  cursor: pointer;
+  min-height: 44px;
+}
+
+.filter-drawer__apply {
+  flex: 1;
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: none;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 0.82rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 44px;
+  transition: background 0.2s;
+}
+
+.filter-drawer__apply:active {
+  background: var(--color-primary-dark);
+}
+
+/* Lazy card placeholder */
+.lazy-card-placeholder {
+  min-height: 180px;
+  border-radius: 6px;
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--color-border-light);
+}
+
+/* ============================================================
+   Mobile Responsive — Core
+   ============================================================ */
+
+@media (max-width: 768px) {
+  /* Show mobile trigger, hide desktop filters */
+  .search-section__mobile-trigger {
+    display: block;
+  }
+
+  .search-section__mobile-count {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--color-text-light);
+    font-family: var(--font-body);
+    margin-bottom: 0.75rem;
+  }
+
+  .search-section__mobile-count strong {
+    color: var(--color-text);
+  }
+
+  .search-section__desktop-filters {
+    display: none;
+  }
+
+  .search-section__search-row {
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+    margin-bottom: 0.75rem;
+  }
+
+  .search-section__search-row .search-autocomplete {
+    flex: 1;
+    margin-bottom: 0;
+  }
+
+  /* Sticky search on mobile */
+  .search-section {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--color-bg);
+    padding-top: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .search-section__header {
+    display: none;
+  }
+
+  /* Denser article cards on mobile */
+  .article-card {
+    padding: 1rem 1.1rem;
+  }
+
+  .article-card__title {
+    font-size: 0.82rem;
+  }
+
+  .article-card__authors {
+    font-size: 0.7rem;
+  }
+
+  /* Horizontally scrollable pills on mobile */
+  .filter-drawer__pills {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+
+  .filter-drawer__pills::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Tap feedback on interactive elements */
+  .article-card:active,
+  .featured__card:active,
+  .article-page__related-card:active {
+    transform: scale(0.98);
+  }
+
+  .pagination__btn:active,
+  .pagination__page:active {
+    transform: scale(0.95);
+  }
+
+  /* Min tap target sizes */
+  .controls-row__checkbox {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .pagination__btn {
+    min-height: 44px;
+  }
+
+  .pagination__page {
+    min-width: 38px;
+    min-height: 38px;
+  }
+
+  .share-buttons__btn,
+  .cite-btn__trigger {
+    min-height: 40px;
+    padding: 8px 12px;
+  }
+
+  .article-page__back {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .hero__about-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}

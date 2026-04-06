@@ -6,6 +6,7 @@ import FeaturedArticles from './FeaturedArticles';
 import StatsBar from './StatsBar';
 import SearchFilters from './SearchFilters';
 import ArticleCard from './ArticleCard';
+import LazyCard from './LazyCard';
 import Pagination from './Pagination';
 import SkeletonCard from './SkeletonCard';
 import Footer from './Footer';
@@ -176,12 +177,13 @@ export default function HomePage({ articles, stats, studyTypes, initialSearch, f
             </div>
           ) : (
             <div className="article-grid">
-              {paginatedArticles.map((article) => (
-                <ArticleCard
-                  key={article.id}
-                  article={article}
-                  searchQuery={search}
-                />
+              {paginatedArticles.map((article, i) => (
+                <LazyCard key={article.id} index={i}>
+                  <ArticleCard
+                    article={article}
+                    searchQuery={search}
+                  />
+                </LazyCard>
               ))}
             </div>
           )}

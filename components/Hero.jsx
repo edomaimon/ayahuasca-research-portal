@@ -1,19 +1,22 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import StatCard from './StatCard';
 import { LeafDivider, ScrollIndicator } from './BotanicalElements';
 
 export default function Hero({ stats }) {
   const videoRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' ? window.innerWidth < 768 : false
+  );
 
   useEffect(() => {
-    // Force video play on mobile devices
+    if (isMobile) return;
     const video = videoRef.current;
     if (video) {
       video.play().catch(() => {});
     }
-  }, []);
+  }, [isMobile]);
 
   return (
     <header className="hero">
@@ -36,22 +39,31 @@ export default function Hero({ stats }) {
         </a>
       </div>
 
-      {/* Video Background */}
+      {/* Video Background — poster-only on mobile */}
       <div className="hero__video-wrapper">
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          className="hero__video"
-        >
-          <source
-            src="https://cdn.coverr.co/videos/coverr-jungle-plants-3922/1080p.mp4"
-            type="video/mp4"
+        {!isMobile ? (
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            className="hero__video"
+          >
+            <source
+              src="https://cdn.coverr.co/videos/coverr-jungle-plants-3922/1080p.mp4"
+              type="video/mp4"
+            />
+          </video>
+        ) : (
+          <div
+            className="hero__poster"
+            style={{
+              backgroundImage: 'url(https://images.unsplash.com/photo-1440581572325-0bea30075d9d?w=800&q=60)',
+            }}
           />
-        </video>
+        )}
         <div className="hero__overlay" />
       </div>
 
