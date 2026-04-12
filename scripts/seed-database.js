@@ -98,6 +98,7 @@ async function seed() {
       study_type: a.studyType || null,
       open_access: a.openAccess || false,
       participants: a.participants || null,
+      created_at: a.addedDate || '2025-01-01T00:00:00Z',
     };
   });
 

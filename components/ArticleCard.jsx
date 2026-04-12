@@ -7,8 +7,8 @@ import HighlightedText from './HighlightedText';
 
 function isNew(createdAt) {
   if (!createdAt) return false;
-  const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000;
-  return new Date(createdAt).getTime() > thirtyDaysAgo;
+  const fifteenDaysAgo = Date.now() - 15 * 24 * 60 * 60 * 1000;
+  return new Date(createdAt).getTime() > fifteenDaysAgo;
 }
 
 export default function ArticleCard({ article, searchQuery }) {
