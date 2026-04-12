@@ -2,7 +2,6 @@
 
 import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import Hero from './Hero';
-import StatsBar from './StatsBar';
 import SearchFilters from './SearchFilters';
 import ArticleCard from './ArticleCard';
 import LazyCard from './LazyCard';
@@ -141,9 +140,6 @@ export default function HomePage({ articles, stats, studyTypes, initialSearch, u
   return (
     <>
       <Hero stats={stats} />
-
-      {/* Stats Overview */}
-      <StatsBar stats={stats} uniqueAuthors={uniqueAuthors} />
 
       <main
         className="main-content"
