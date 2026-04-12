@@ -2,6 +2,8 @@ import { getAllArticles, getArticleStats, getStudyTypes, getUniqueAuthorsCount }
 import { CATEGORIES } from '@/data/categories';
 import HomePage from '@/components/HomePage';
 
+export const revalidate = 3600; // revalidate every hour
+
 const SITE_URL = 'https://www.ayahuasca-research.com';
 
 export default async function Page({ searchParams }) {

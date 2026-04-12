@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getArticleBySlug, getRelatedArticles, getAllSlugs, getAdjacentArticles } from '@/lib/articles';
+
+export const revalidate = 3600;
 import { CATEGORIES } from '@/data/categories';
 import VerificationBadge from '@/components/VerificationBadge';
 import { LeafDivider } from '@/components/BotanicalElements';
