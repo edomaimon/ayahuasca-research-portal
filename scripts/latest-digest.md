@@ -1,27 +1,16 @@
 # Ayahuasca Research Portal — New Articles
-**April 01, 2026** · 2 new articles added · 155 total in database
+**April 15, 2026** · 1 new article added · 174 total in database
 
 ---
 
-### Ayahuasca and Public Health III: Health Status of a Sample of Ayahuasca Ceremony Attenders in Portugal
-**Teixeira PJ et al.** · *Journal of psychoactive drugs* (2026)
+### Single exposure to Ayahuasca reverses chronic stress effects on sociability, anxiety, cortisol, and BDNF in zebrafish
+**Lodetti G et al.** · *Psychopharmacology* (2026)
 
-Ayahuasca, a traditional Amazonian psychoactive brew, has gained increasing attention for its potential health benefits; however, no previous research has investigated its use in Portugal. This study aims to evaluate the health status, lifestyle b...
+BACKGROUND: Chronic stress is a risk factor for the development of anxiety, depression, and comorbid systemic conditions. Ayahuasca (AYA) has been used for hundreds of years and it elicits antidepressant and anxiolytic effects. However, it remains...
 
-[PubMed](https://pubmed.ncbi.nlm.nih.gov/41854389/) · [Full text](https://doi.org/10.1080/02791072.2026.2631378)
+[PubMed](https://pubmed.ncbi.nlm.nih.gov/41974985/) · [Full text](https://doi.org/10.1007/s00213-026-07058-z)
 
-**Category:** Psychology · **Type:** Cross-sectional survey
-
----
-
-### Ayahuasca and Its Main Component N,N-Dimethyltryptamine (DMT) for the Treatment of Mental Disorders: Mechanisms of Action, Clinical Studies, and Tools to Explore the Human Mind
-**Melani A et al.** · *Biomedicines* (2026)
-
-In recent years, psychopharmacology has experienced a significant challenge, highlighting a renewed and strong scientific interest in psychedelics as breakthrough therapies for mental disorders. Psychedelics can influence cognitive and emotional p...
-
-[PubMed](https://pubmed.ncbi.nlm.nih.gov/41898153/) · [Full text](https://doi.org/10.3390/biomedicines14030506)
-
-**Category:** Clinical Trials · **Type:** Pharmacokinetic study
+**Category:** Depression & Mood · **Type:** Clinical trial protocol
 
 ---
 

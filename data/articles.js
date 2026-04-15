@@ -2,9 +2,9 @@
 // AYAHUASCA RESEARCH PORTAL - VERIFIED ARTICLES DATABASE v9
 // ============================================================
 // Every article verified via PubMed, DOI.org, or publisher.
-// Audit date: April 12, 2026 (comprehensive CrossRef + PubMed audit)
-// Total articles: 173
-// Total: 173 peer-reviewed articles
+// Audit date: April 15, 2026 (auto-ingestion)
+// Total articles: 174
+// Total: 174 peer-reviewed articles
 // v9: FULL DATABASE AUDIT — all 156 DOIs verified against CrossRef API + PubMed
 //   - REMOVED 7 fabricated/unverifiable entries:
 //     ID 29: Fake (duplicate of ID 120 with wrong title/journal/year)
@@ -235,6 +235,8 @@ export const VERIFIED_ARTICLES = [
   { id:193, addedDate:"2026-04-12T00:00:00Z", title:"DMT and harmala alkaloids: an exploratory study of oral Acacia based formulations in healthy volunteers", authors:["Bonomo YA","Norman AF","Collins L","Castle DJ","Sarris J"], journal:"Frontiers in Psychiatry", year:2025, doi:"10.3389/fpsyt.2025.1545915", pmid:"40896210", category:"Pharmacology", studyType:"Open-label crossover", participants:9, openAccess:true, citations:0, abstract:"Open-label crossover safety study in 9 healthy participants found three Acacia-derived DMT/harmala formulations had good safety profiles with no serious adverse events. Subjective effects comparable to traditional ayahuasca, supporting feasibility as clinical trial alternatives.", keywords:["Acacia","formulation","safety","crossover","clinical alternative"], verification:"PubMed" },
   { id:194, addedDate:"2026-04-12T00:00:00Z", title:"Effects of a single dose of ayahuasca in college students with harmful alcohol use: a single-blind, feasibility, proof-of-concept trial", authors:["Rodrigues LS","Reis JAS","Rossi GN","Hallak JEC","Dos Santos RG"], journal:"Journal of Clinical Psychopharmacology", year:2024, doi:"10.1097/JCP.0000000000001872", pmid:"38820373", category:"Addiction", studyType:"Feasibility trial", participants:11, openAccess:false, citations:5, abstract:"Feasibility trial in 11 college students with harmful alcohol use found that a single ayahuasca dose plus psychological support was well-tolerated with no serious adverse events. Transient reductions in drinking frequency observed, warranting larger controlled trials.", keywords:["alcohol","college students","feasibility","proof-of-concept","harm reduction"], verification:"PubMed" },
   { id:195, addedDate:"2026-04-12T00:00:00Z", title:"Resilience and brain changes in long-term ayahuasca users: insights from psychometric and fMRI pattern recognition", authors:["Ramos LR","Fernandes O Jr","Sanchez TA"], journal:"Journal of Magnetic Resonance Imaging", year:2025, doi:"10.1002/jmri.70063", pmid:"40836566", category:"Neuroscience", studyType:"Neuroimaging study", participants:38, openAccess:false, citations:0, abstract:"Comparing 19 long-term ayahuasca users with 19 non-users via fMRI and machine learning (75% classification accuracy). Users showed significantly higher psychological resilience scores and altered emotional brain reactivity patterns, suggesting neuroadaptive effects of sustained ayahuasca use.", keywords:["resilience","fMRI","machine learning","brain changes","long-term users"], verification:"PubMed" }
+,
+  { id:196, title:"Single exposure to Ayahuasca reverses chronic stress effects on sociability, anxiety, cortisol, and BDNF in zebrafish", authors:["Lodetti G","Inserra A","Redivo H","Teixeira AG","de Bitencourt RM","Rico EP"], journal:"Psychopharmacology", year:2026, doi:"10.1007/s00213-026-07058-z", pmid:"41974985", category:"Depression & Mood", studyType:"Clinical trial protocol", openAccess:false, citations:0, abstract:"BACKGROUND: Chronic stress is a risk factor for the development of anxiety, depression, and comorbid systemic conditions. Ayahuasca (AYA) has been used for hundreds of years and it elicits antidepressant and anxiolytic effects. However, it remains unknown whether AYA elicits a behavioral and biochemical protective effect in chronic stress. AIM O...", keywords:["anxiety","ayahuasca","bdnf","chronic stress"], verification:"PubMed-Auto" }
 ];
 
 // Generate slugs for all articles at module load time
