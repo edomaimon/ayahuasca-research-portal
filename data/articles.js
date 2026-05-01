@@ -2,9 +2,9 @@
 // AYAHUASCA RESEARCH PORTAL - VERIFIED ARTICLES DATABASE v9
 // ============================================================
 // Every article verified via PubMed, DOI.org, or publisher.
-// Audit date: April 15, 2026 (auto-ingestion)
-// Total articles: 174
-// Total: 174 peer-reviewed articles
+// Audit date: May 01, 2026 (auto-ingestion)
+// Total articles: 176
+// Total: 176 peer-reviewed articles
 // v9: FULL DATABASE AUDIT — all 156 DOIs verified against CrossRef API + PubMed
 //   - REMOVED 7 fabricated/unverifiable entries:
 //     ID 29: Fake (duplicate of ID 120 with wrong title/journal/year)
@@ -237,6 +237,9 @@ export const VERIFIED_ARTICLES = [
   { id:195, addedDate:"2026-04-12T00:00:00Z", title:"Resilience and brain changes in long-term ayahuasca users: insights from psychometric and fMRI pattern recognition", authors:["Ramos LR","Fernandes O Jr","Sanchez TA"], journal:"Journal of Magnetic Resonance Imaging", year:2025, doi:"10.1002/jmri.70063", pmid:"40836566", category:"Neuroscience", studyType:"Neuroimaging study", participants:38, openAccess:false, citations:0, abstract:"Comparing 19 long-term ayahuasca users with 19 non-users via fMRI and machine learning (75% classification accuracy). Users showed significantly higher psychological resilience scores and altered emotional brain reactivity patterns, suggesting neuroadaptive effects of sustained ayahuasca use.", keywords:["resilience","fMRI","machine learning","brain changes","long-term users"], verification:"PubMed" }
 ,
   { id:196, title:"Single exposure to Ayahuasca reverses chronic stress effects on sociability, anxiety, cortisol, and BDNF in zebrafish", authors:["Lodetti G","Inserra A","Redivo H","Teixeira AG","de Bitencourt RM","Rico EP"], journal:"Psychopharmacology", year:2026, doi:"10.1007/s00213-026-07058-z", pmid:"41974985", category:"Depression & Mood", studyType:"Clinical trial protocol", openAccess:false, citations:0, abstract:"BACKGROUND: Chronic stress is a risk factor for the development of anxiety, depression, and comorbid systemic conditions. Ayahuasca (AYA) has been used for hundreds of years and it elicits antidepressant and anxiolytic effects. However, it remains unknown whether AYA elicits a behavioral and biochemical protective effect in chronic stress. AIM O...", keywords:["anxiety","ayahuasca","bdnf","chronic stress"], verification:"PubMed-Auto" }
+,
+  { id:197, title:"Brain-body integromics of the ayahuasca experience", authors:["Madrid-Gambin F","Mallaroni P","Haro N","Pozo OJ","Mason NL","Reckweg JT","Kloft-Heller L","van Oorsouw K","Toennes SW","Ramaekers JG"], journal:"Biomedicine & pharmacotherapy = Biomedecine & pharmacotherapie", year:2026, doi:"10.1016/j.biopha.2026.119391", pmid:"42030660", category:"Neuroscience", studyType:"Neuroimaging study", openAccess:false, citations:0, abstract:"Ayahuasca is a psychoactive brew containing N,N-dimethyltryptamine (DMT) and β-carboline alkaloids that induces marked alterations in perception, emotion and self-referential processing. However, the multiscale biological organization linking peripheral metabolism, brain network dynamics, neurochemistry, and subjective experience in humans remai...", keywords:["ayahuasca","connectome","dimethyltryptamine","integromics"], verification:"PubMed-Auto" },
+  { id:198, title:"Ayahuasca Therapy: Possible Reduction of Suicidal Ideation in Treatment-Resistant Depression - A Systematic Review", authors:["Mano-Sousa BJ","Fontes MCG","Gonçalves ACA","Galduróz JCF","Duarte-Almeida JM"], journal:"Journal of psychoactive drugs", year:2026, doi:"10.1080/02791072.2026.2661580", pmid:"42023657", category:"Depression & Mood", studyType:"Systematic review", openAccess:false, citations:0, abstract:"Suicide, particularly in treatment-resistant depression (TRD), remains a pressing global health issue, with over 700,000 annual deaths. Existing treatments often have limited efficacy and delayed onset, creating a need for rapid-acting interventions. Ayahuasca, a traditional Amazonian psychedelic, has shown potential for rapidly reducing suicida...", keywords:["alternative therapy","dmt","ayahuasca","neuroplasticity"], verification:"PubMed-Auto" }
 ];
 
 // Generate slugs for all articles at module load time

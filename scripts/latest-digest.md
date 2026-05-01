@@ -1,16 +1,27 @@
 # Ayahuasca Research Portal — New Articles
-**April 15, 2026** · 1 new article added · 174 total in database
+**May 01, 2026** · 2 new articles added · 176 total in database
 
 ---
 
-### Single exposure to Ayahuasca reverses chronic stress effects on sociability, anxiety, cortisol, and BDNF in zebrafish
-**Lodetti G et al.** · *Psychopharmacology* (2026)
+### Brain-body integromics of the ayahuasca experience
+**Madrid-Gambin F et al.** · *Biomedicine & pharmacotherapy = Biomedecine & pharmacotherapie* (2026)
 
-BACKGROUND: Chronic stress is a risk factor for the development of anxiety, depression, and comorbid systemic conditions. Ayahuasca (AYA) has been used for hundreds of years and it elicits antidepressant and anxiolytic effects. However, it remains...
+Ayahuasca is a psychoactive brew containing N,N-dimethyltryptamine (DMT) and β-carboline alkaloids that induces marked alterations in perception, emotion and self-referential processing. However, the multiscale biological organization linking peri...
 
-[PubMed](https://pubmed.ncbi.nlm.nih.gov/41974985/) · [Full text](https://doi.org/10.1007/s00213-026-07058-z)
+[PubMed](https://pubmed.ncbi.nlm.nih.gov/42030660/) · [Full text](https://doi.org/10.1016/j.biopha.2026.119391)
 
-**Category:** Depression & Mood · **Type:** Clinical trial protocol
+**Category:** Neuroscience · **Type:** Neuroimaging study
+
+---
+
+### Ayahuasca Therapy: Possible Reduction of Suicidal Ideation in Treatment-Resistant Depression - A Systematic Review
+**Mano-Sousa BJ et al.** · *Journal of psychoactive drugs* (2026)
+
+Suicide, particularly in treatment-resistant depression (TRD), remains a pressing global health issue, with over 700,000 annual deaths. Existing treatments often have limited efficacy and delayed onset, creating a need for rapid-acting interventio...
+
+[PubMed](https://pubmed.ncbi.nlm.nih.gov/42023657/) · [Full text](https://doi.org/10.1080/02791072.2026.2661580)
+
+**Category:** Depression & Mood · **Type:** Systematic review
 
 ---
 
