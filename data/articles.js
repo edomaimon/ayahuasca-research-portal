@@ -2,9 +2,9 @@
 // AYAHUASCA RESEARCH PORTAL - VERIFIED ARTICLES DATABASE v9
 // ============================================================
 // Every article verified via PubMed, DOI.org, or publisher.
-// Audit date: July 15, 2026 (auto-ingestion)
-// Total articles: 185
-// Total: 185 peer-reviewed articles
+// Audit date: September 15, 2026 (auto-ingestion)
+// Total articles: 186
+// Total: 186 peer-reviewed articles
 // v9: FULL DATABASE AUDIT — all 156 DOIs verified against CrossRef API + PubMed
 //   - REMOVED 7 fabricated/unverifiable entries:
 //     ID 29: Fake (duplicate of ID 120 with wrong title/journal/year)
@@ -252,6 +252,8 @@ export const VERIFIED_ARTICLES = [
   { id:205, title:"Beyond Enthusiasm: Ayahuasca and the Future of Depression Research", authors:["Sá Filho AS","Fajemiroye JO","Nardi AE","Machado S"], journal:"Revista brasileira de psiquiatria (Sao Paulo, Brazil : 1999)", year:2026, doi:"10.47626/1516-4446-2026-5035", pmid:"42413001", category:"Depression & Mood", studyType:"Cross-sectional survey", openAccess:false, citations:0, abstract:"", keywords:["ayahuasca","depression"], verification:"PubMed-Auto" },
   { id:206, title:"Combined DMT-harmine formulation reduces negative self-referential emotions during social self-evaluation: a randomized placebo-controlled trial in healthy volunteers", authors:["Aicher HD","Dornbierer J","Caflisch L","Suay D","Mueller MJ","Landolt HP","Quednow BB","Scheidegger M","Dornbierer D"], journal:"Psychopharmacology", year:2026, doi:"10.1007/s00213-026-07118-4", pmid:"42443620", category:"Clinical Trials", studyType:"Randomized Controlled Trial", openAccess:false, citations:0, abstract:"RATIONALE AND OBJECTIVES: Negative self-referential emotions such as embarrassment and shame play a key role in the psychopathology of psychiatric disorders but are often insufficiently addressed by standard treatments. Psychedelics such as ayahuasca - an Amazonian plant decoction containing the psychedelic N,N-dimethyltryptamine (DMT) and harma...", keywords:["embarrassment","hallucinogens","harmine","n,n-dimethyltryptamine"], verification:"PubMed-Auto" },
   { id:207, title:"Harmaline and the gut-brain-immune axis: a novel therapeutic avenue in neuroinflammation and ulcerative colitis", authors:["Giri M","Arya S","Grover M","Yadav D","Chatterjee S","Rath SK"], journal:"Inflammopharmacology", year:2026, doi:"10.1007/s10787-026-02322-2", pmid:"42417936", category:"Pharmacology", studyType:"Neuroimaging study", openAccess:false, citations:0, abstract:"Chronic inflammatory disorders like neuroinflammatory disorders and ulcerative colitis (UC) have some common pathogenic mechanisms such as persistent activation of nuclear factor-κB (NF-κB), oxidative and nitrosative stress, mitochondrial dysfunction, immune dysregulation, and disruption of the integrity of the epithelial barrier. The gut-brain-...", keywords:["gut–brain–immune axis","harmaline","neuroinflammation","ulcerative colitis"], verification:"PubMed-Auto" }
+,
+  { id:208, title:"Severe Serotonin Syndrome With Acute Respiratory Failure Following Ayahuasca and Dextromethorphan Use: A Case Report", authors:["Pack S","Ellett TR","Pham J","Ahmad Y"], journal:"Cureus", year:2026, doi:"10.7759/cureus.114211", pmid:"42713547", category:"Depression & Mood", studyType:"Case report", openAccess:true, citations:0, abstract:"Ayahuasca is a psychoactive botanical brew originating from Amazonian ceremonial traditions, containing monoamine oxidase inhibitors (MAOIs) derived from Banisteriopsis caapi and N,N-dimethyltryptamine from Psychotria viridis or Diplopterys cabrerana. Its use has expanded globally for perceived antidepressant and anti-addictive effects. However,...", keywords:["acute respiratory failure","ayahuasca","dextromethorphan","monoamine oxidase inhibitors"], verification:"PubMed-Auto" }
 ];
 
 // Generate slugs for all articles at module load time
